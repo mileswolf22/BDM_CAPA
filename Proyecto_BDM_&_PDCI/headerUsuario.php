@@ -1,3 +1,8 @@
+<?php
+	session_start();
+    $_SESSION['US'] = $_REQUEST['usuario'];
+    
+?>
 <div class="loader"></div>
 
     <header>
@@ -6,7 +11,7 @@
                 <a href="Pagina_PerfilUsuario.php" class="">
                 <img class="imagen-perfilusuario" src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" width="60" height="60">
                 <h1 class="bienvenida_usuario"> Bienvenido</h1>
-                <h1 class="nombre_usuario" id="nombre_usuario"> AryMistery</h1> 
+                <h1 class="nombre_usuario" id="nombre_usuario"><?php $_SESSION['US']?></h1> 
             </a></div>
             
             

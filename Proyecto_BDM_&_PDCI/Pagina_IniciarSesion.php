@@ -1,3 +1,10 @@
+<?php
+	session_start();
+    $_SESSION['rol'] = '';
+    $_SESSION['US'] = '';
+    $_SESSION['CON'] = '';
+    
+?>
 
 <!DOCTYPE html>
 
@@ -19,13 +26,20 @@
 
 <body>
     <div class="loader"></div>
-
+    
     <body>
-        <form action="Pagina_PrincipalUsuario.php" method="GET" id="form">
+        <form class= "Login" action="C_Login.php" method="Post">
             <div class="form">
                 <h1>Iniciar Sesión</h1>
                 <br>
+                <label>Tipo de usuario:</label>
+                <SELECT name="tipoUsuario" id="tipoUsuario">
+                <OPTION value="Lector" selected>Lector</OPTION>
+                <OPTION value="Reportero">Reportero</OPTION>
+                <OPTION value="Editor">Editor</OPTION>
+                </SELECT >
                 <div class="grupo">
+        
                     <input type="text" name="usuario" id="usuario" required><span class="barra"></span>
                     <label class="datos-form" for="">Usuario</label>
                 </div>
@@ -34,14 +48,14 @@
                     <label class="datos-form" for="">Contraseña</label>
                 </div>    
                 <br>
-                <button type="submit" class="boton-iniciarsesion">Ingresar</button>
-               
-
+                
             </div>
 
-            <br>
-            <a class = "boton-crearcuentaIniciarSesion" href="Pagina_RegistroUsuario.php">Haz clic aqui para crear una cuenta</a>
-            <br>
+                <button type="submit" class="boton-iniciarsesion">Ingresar</button>
+
+                
+
+            
         </form>               
 
         

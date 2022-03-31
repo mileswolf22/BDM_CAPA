@@ -73,6 +73,7 @@
                     <input type="text" name="confirmarcontraseña" id="confirmarcontraseña" required>
                     <span class="barra"></span>
                     <label class="datos-form" for="">Confirmar Contraseña</label>
+                
                 </div>   
                 <button type="submit">Registrarme</button>
             </div>
