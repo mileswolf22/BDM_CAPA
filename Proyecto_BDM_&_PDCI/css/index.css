@@ -1,0 +1,183 @@
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:boader-box;
+    }
+
+    :root{
+        --margenes: 60px;
+        --espacios-contenido:45px;
+        --navText:25px;
+        --black-SmoothCriminal:#141414;
+        --white-AllOfMe:#EBEBEB;
+        --violet-ColdHeart:#49408C;
+        --violet-BackInBlack:#71706F;
+        --violet-AllTooWell:#6f65b844;
+        --violet-TheMotto:#602c82a4;
+        --violet-NovemberRain:#71706F;
+        --cian-JustLookUp:#49a09da8;
+        --gray-TheScientist:#71706F;
+        --gray-Up:#6f65b844;
+        --cian-TeenageDream:#4568DC;
+        --pink-CaliforniaGirls:#B06AB3; 
+
+      }
+
+    body{
+        font-family: 'Open Sans', sans-serif;
+        background: var(--black-SmoothCriminal);
+    }
+
+
+    /* //////////////////////////////////////////////////////    HEADER */
+
+    header {
+        width: 100%;
+        height: 600px;
+        background: --violet-ColdHeart;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right,var(--violet-TheMotto), var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, var(--violet-TheMotto),var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+    
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    nav{
+        text-align: right;
+        padding: 30px 50px 0 0;
+        background: var(--black-SmoothCriminal);
+    }
+
+    nav > a{
+        color:var(--white-AllOfMe);
+        font-size: var(--navText);
+        font-weight: 300;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    nav > b{
+        color: var(--white-AllOfMe);
+        font-size: var(--navText);
+        font-weight: 300;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    header .textos-header{
+        display: flex;
+        height: 430px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .textos-header h2{
+        font-size: 60px;
+        font-weight: 300;
+        color:var(--white-AllOfMe);
+    }
+
+    .textos-header h3{
+        font-size: 25px;
+        font-weight: 300;
+        color:var(--white-AllOfMe);
+    }
+
+
+
+    /* //////////////////////////////////////////////////////   BODY */
+
+    .contenedor{
+        margin:auto;
+        padding: 60px 0;
+        width: 90%;
+        max-width: 1000px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .contenedor h3{
+        text-align: center;
+        color: var(--white-AllOfMe);
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .contenedor p{
+        text-align: center;
+        color: var(--white-AllOfMe);
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .galeria-noticias{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      
+    
+
+      .cont-noticias{
+        width: 31%;
+        box-shadow: 0 0 6px 0 rgba(0,0,0,.5);
+        height:300px;
+        overflow: hidden;
+        margin-bottom: var(--espacios-contenido);
+      }
+      
+      .img-noticias{
+        height: 90%;
+        width: 100%;
+      }
+      
+      .img-noticias img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      
+      .textos-noticias{
+        height: 10%;
+      }
+      
+      .textos-noticias h4{
+        line-height: 30px;
+        font-weight: 300;
+        background: var(--violet-NovemberRain);
+        color:var(--white-AllOfMe);
+      }
+
+
+      
+
+
+/* //////////////////////////////////////////////////////    REDUCCION */
+
+@media screen and (max-width: 700px){
+    :root{
+        --margenes: 30px;
+        --navText: 20px;
+      }
+}
+
+@media screen and (max-width: 500px){
+    :root{
+      --espacios-contenido: 25px;
+      --navText: 15px;
+    }
+
+    .cont-noticias{
+      width: 85%;
+    }
+
+  }

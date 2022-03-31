@@ -1,0 +1,226 @@
+
+    
+    body{
+        font-family: 'Open Sans', sans-serif;
+    }
+
+
+:root{
+    --black-SmoothCriminal:#141414;
+    --black-SmellsLikeTeenSpirit:rgb(0, 0, 0);
+    --black-ImNotTheOnlyOne:#222;
+    --white-AllOfMe:#EBEBEB;
+    --violet-ColdHeart:#49408C;
+    --violet-BackInBlack:#71706F;
+    --violet-AllTooWell:#6f65b844;
+    --violet-TheMotto:#602c82a4;
+    --violet-NovemberRain:#71706F;
+    --violet-MyUniverse: #a9a1e0;
+    --violet-Levitating: #6F65B8;
+    --cian-JustLookUp:#49a09da8;
+    --gray-TheScientist:#71706F;
+    --gray-Up:#6f65b844;
+    --gray-Creep:#a9a1e0;
+    --cian-TeenageDream:#4568DC;
+    --pink-CaliforniaGirls:#B06AB3;
+    --transparent: #00000000;
+
+    --espacios-contenido:45px;
+
+  }
+
+
+  /* //////////////////////////////////////////////////////   MAIN */
+
+
+.contenedor-Bienvenida{
+    background-size: 100% 100%;
+    
+    background: var(--violet-ColdHeart);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,var(--violet-TheMotto), var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--violet-TheMotto), var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    position: relative;
+    top:50px;
+   
+}
+
+.contenedor-Bienvenida h2{
+    font-size: 60px;
+    font-weight: 300;
+    color:var(--white-AllOfMe);
+}
+
+.contenedor-Bienvenida h3{
+    font-size: 25px;
+    font-weight: 300;
+    color:var(--white-AllOfMe);
+}
+
+/* ////////////////////////    CONTENEDOR ACCIONES ADMINISTRADOR */
+
+.HerramientasAdministrador{
+    padding: 30px 50px 0 0;
+    text-align: center;
+}
+
+
+.HerramientasAdministrador > a{
+    color:var(--white-AllOfMe);
+    font-size: 25px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.HerramientasAdministrador > a:hover {
+    background-color: var(--violet-BackInBlack); 
+    background-size: 100% 100%;
+    box-shadow: 0px 30px 30px var(--violet-ColdHeart);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.HerramientasAdministrador > abbr:hover {
+    background-color: var(--violet-BackInBlack); 
+    background-size: 100% 100%;
+    box-shadow: 0px 30px 30px var(--violet-ColdHeart);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.HerramientaAdminImg:hover {
+    background-color: var(--violet-BackInBlack); 
+    background-size: 100% 100%;
+    box-shadow: 0px 30px 30px var(--violet-ColdHeart);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.HerramientasAdministrador > b{
+    color:var(--white-AllOfMe);
+    font-size: 25px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+#dropdownMenuButton2{
+    background-color: var(--transparent);
+    background: var(--transparent);
+    border: var(--transparent);
+}
+
+#dropdownMenuButton2:hover {
+    background-color: var(--violet-BackInBlack); 
+    background-size: 100% 100%;
+    box-shadow: 0px 30px 30px var(--violet-ColdHeart);
+    border-radius: 3px;
+    cursor: pointer;
+    border:var(--transparent);
+}
+
+#dropdownMenuButton1{
+    background-color: var(--transparent);
+    background: var(--transparent);
+    border: var(--transparent);
+}
+
+#dropdownMenuButton1:hover {
+    background-color: var(--violet-BackInBlack); 
+    background-size: 100% 100%;
+    box-shadow: 0px 30px 30px var(--violet-ColdHeart);
+    border-radius: 3px;
+    cursor: pointer;
+    border:var(--transparent);
+}
+
+/* ////////////////////////   NOTICIAS PENDIENTES */
+    
+    
+.contenedor{
+    padding:80px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+   
+}
+
+.titulo{
+    color: var(--violet-ColdHeart);
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.titulo-nosotros{
+    color: var(--white-AllOfMe);
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+
+.noticiasCard{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.NotiCard{
+    width: 31%;
+    overflow: hidden;
+    margin-bottom: var(--espacios-contenido);
+}
+
+#cardCategoria{
+    background-color: var(--cian-TeenageDream);
+    
+}
+
+.card-link{
+    text-align: center;
+    text-decoration: none;
+}
+
+
+     /* ////////////////////////    REDUCCION PAGINA */
+
+
+     @media only screen and (max-width: 500px){
+
+        :root{
+            --espacios-contenido: 25px;
+          }
+
+          
+          .NotiCard{
+              width: 100%;
+
+          }
+
+
+     }
+
+
+
+
+/* ////////////////////////    REDUCCION PAGINA */
+
+
+@media only screen and (max-width: 700px){
+
+    
+
+ }
+
+@media only screen and (max-width: 500px){
+
+    
+ }

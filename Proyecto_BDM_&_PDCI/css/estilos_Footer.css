@@ -1,0 +1,75 @@
+
+
+:root{
+    --black-SmoothCriminal:#141414;
+    --white-AllOfMe:#EBEBEB;
+    --violet-ColdHeart:#49408C;
+    --violet-BackInBlack:#71706F;
+    --violet-AllTooWell:#6f65b844;
+    --violet-TheMotto:#602c82a4;
+    --violet-NovemberRain:#71706F;
+    --cian-JustLookUp:#49a09da8;
+    --gray-TheScientist:#71706F;
+    --gray-Up:#6f65b844;
+    --cian-TeenageDream:#4568DC;
+    --pink-CaliforniaGirls:#B06AB3; 
+  }
+
+
+/* //////////////////////////////////////////////////////    FOOTER */
+
+.barraContenedor{
+    width: 100%;
+    height: 20px;
+    background: var(--violet-ColdHeart);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,var(--violet-TheMotto), var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--violet-TheMotto),var(--cian-JustLookUp)), url(../recursos/imagenes/galaxy.jpg);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+  }
+
+
+footer{
+    background: var(--black-SmoothCriminal);
+    margin: auto;
+    overflow: hidden;
+}
+
+.contenedor-footer{
+    display: flex;
+    height: 200px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.contenedor-footer > h4{
+    color:var(--white-AllOfMe);
+    font-size: 20px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.imagen-redes-sociales{
+    height: 80px;
+    text-align: center;
+}
+
+.contenedor-footer > h3{
+    color:var(--white-AllOfMe);
+    font-size: 15px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+    text-align: center;
+}

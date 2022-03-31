@@ -1,0 +1,445 @@
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:boader-box;
+    }
+    
+    
+    body{
+        font-family: 'Open Sans', sans-serif;
+    }
+
+
+
+:root{
+    --black-SmoothCriminal:#141414;
+    --black-SmellsLikeTeenSpirit:rgb(0, 0, 0);
+    --black-ImNotTheOnlyOne:#222;
+    --white-AllOfMe:#EBEBEB;
+    --violet-ColdHeart:#49408C;
+    --violet-BackInBlack:#71706F;
+    --violet-AllTooWell:#6f65b844;
+    --violet-TheMotto:#602c82a4;
+    --violet-NovemberRain:#71706F;
+    --violet-MyUniverse: #a9a1e0;
+    --violet-Levitating: #6F65B8;
+    --cian-JustLookUp:#49a09da8;
+    --gray-TheScientist:#71706F;
+    --gray-Up:#6f65b844;
+    --gray-Creep:#a9a1e0;
+    --cian-TeenageDream:#4568DC;
+    --pink-CaliforniaGirls:#B06AB3; 
+
+    --espacios-contenido:45px;
+  }
+
+  /* /////////////////////////////////////////////// SECTION NOTICIAS */
+
+
+  .contenedor{
+    padding:80px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+   
+}
+
+
+.titulo{
+    color: var(--violet-ColdHeart);
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contenedor-NoticiaScroll{
+    background: var(--violet-MyUniverse);
+    padding: 50px 50px;
+    box-shadow: 0 0 6px 0 var(--violet-MyUniverse);
+    border-radius: 8px;
+    margin: 50px;
+}
+
+.grupo-Noticia{
+    padding: 50px 0px;
+    box-shadow: 0 0 10px 0 var(--violet-MyUniverse);
+    border-radius: 8px;
+
+}
+
+.noticia-Categoria{
+    background-color: var(--cian-TeenageDream);
+    padding: 20px 10px;
+    box-shadow: 0 0 10px 0 var(--violet-Levitating);
+    border-radius: 8px;
+}
+
+.noticia-fondo{
+    background: var(--violet-Levitating);
+    padding: 20px 10px;
+    box-shadow: 0 0 10px 0 var(--violet-Levitating);
+    border-radius: 8px;
+}
+
+.LugarFechaNoticia{
+
+    display:flex;
+    flex-wrap: wrap;
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+.LugarFechaNoticia-Datos{
+    color: var(--white-AllOfMe);
+    font-size: 16px;
+    font-weight: 800;
+    margin-left: 5px;
+    justify-content:left;
+}
+
+.Datos-Noticia{
+
+    display:flex;
+    flex-wrap: wrap;
+    text-align: right;
+    margin-right: 10px;
+    justify-content:right;
+}
+
+.DatosNoticia-Datos{
+    color: var(--gray-Creep);
+    font-size: 12px;
+    text-align: right;
+    margin-right: 5px;
+
+}
+
+.noticia-fondo>h4{
+    color: var(--white-AllOfMe);
+    font-weight: 600;
+    font-size: 16px;
+    text-align: left; 
+    position: relative;
+}
+
+.noticia-fondo>p{
+    color: var(--white-AllOfMe);
+    font-weight: 600;
+    font-size: 18px;
+    text-align: justify; 
+    position: relative;
+}
+
+.Pregunta-Categoria{
+    border: none;
+    display: block;
+    width: 12%;
+    font-weight: 400;
+    margin: 10px auto;
+    color: var(--white-AllOfMe);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    text-align: center;
+    background: var(--violet-ColdHeart);
+    border-radius: 8px;
+    right: 20%;
+    top: 290px;
+
+}
+
+
+.text-noticia{
+    background: var(--violet-ColdHeart);  
+    box-shadow: 0 0 10px 0 var(--violet-Levitating);
+    border-radius: 8px;   
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,var(--violet-TheMotto), var(--cian-JustLookUp));
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--violet-TheMotto), var(--cian-JustLookUp));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+
+
+video{
+    width:100%;
+    background:var(--black-SmellsLikeTeenSpirit);
+    }
+
+#CarruselVideoPrev{
+    height: 250px;
+}
+
+#CarruselVideoNext{
+    height: 250px;
+}
+
+
+ /* ////////////////////////   CATEGORIAS O ETIQUETAS */
+
+ #TodasCategorias{
+    overflow:auto;
+    scrollbar-width: thin;
+ }
+
+ #TodasCategorias::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: var(--gray-TheScientist);
+    border-radius: 4px;
+}
+
+#TodasCategorias::-webkit-scrollbar-thumb {
+    background: var(--violet-ColdHeart);
+    border-radius: 4px;
+}
+
+
+.Tcategorias{
+    margin: 30px ;
+}
+
+.TodasCategorias>h3{
+    color: var(--white-AllOfMe);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.aCategoria{
+    color:var(--white-AllOfMe);
+    font-size: 16px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.aCategoria:hover {
+    background-color: var(--white-AllOfMe); 
+    box-shadow: 5px 5px 5px 5px var(--white-AllOfMe);
+    border-radius: 20px;
+}
+
+.bCategoria{
+    color:var(--white-AllOfMe);
+    font-size: 16px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* ////////////////////////////////////////// LIKE DISLIKE */
+
+.imagenLike{
+    display:flex;
+    flex-wrap: wrap;
+    text-align: right;
+    margin: auto;
+    justify-content:center;
+    background: var(--black-SmellsLikeTeenSpirit);
+    width: 4em;
+    border-radius: 30px;
+
+}
+
+#LikeP_1{
+    background: var(--violet-ColdHeart);
+    border-radius: 20px;
+}
+
+
+ /* ////////////////////////   CONTENEDOR FORM RESPUESTAS */
+
+
+ .comentariosRespuestas{
+    background: var(--white-AllOfMe);
+    padding: 25px 30px;
+    box-shadow: 0 0 6px 0 var(--white-AllOfMe);
+    border-radius: 8px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.comentariosRespuestasform{
+    border-radius: 8px;
+}
+
+.grupo{
+    position: relative;
+    margin: 10px ;
+}
+
+.datos-form{
+    color: var(--violet-NovemberRain);
+        font-size: 14px;
+        font-weight: 400;
+        position: absolute;
+        left: 5px;
+        top: -20px;
+}
+
+.foto-form {     
+    text-align: center;
+    color: var(--violet-NovemberRain);
+    background-color: var(--violet-AllTooWell);
+    display: block;
+    padding: .5em 1em;
+    width: 20em;
+    text-align: center;
+}
+
+.grupo>input{
+    background: none;
+    color: var(--violet-NovemberRain);
+    font-size: 16px;
+    padding: 15px 5px 10px 5px;
+    display: block;
+    width: 325px;
+    border: none;
+    border-bottom: 1px var(--violet-NovemberRain);
+    width: 21em;
+}
+
+  #comment{
+    position: relative;
+    width: 325px;
+    height: 250px;
+    top: 8px;
+
+}
+
+.buttonComentario{
+    background: var(--violet-ColdHeart);        
+    border: none;
+    display: block;
+    color: var(--white-AllOfMe);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: .5em 2em;
+    width: 21em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.buttonNoticiaEsh{
+    background: var(--violet-ColdHeart);        
+    border: none;
+    display: block;
+    color: var(--white-AllOfMe);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: .5em 2em;
+    width: 21em;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+
+
+
+/* ////////////////////////   CONTENEDOR RESPUESTAS */
+
+.respuesta {
+    padding: 30px 15px;
+    box-shadow: 0 0 10px 0 var(--white-AllOfMe);
+    background: var(--white-AllOfMe);
+    border-radius: 8px;
+    margin-bottom: 15px;
+
+}
+
+.imagen-usuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    position: absolute;
+
+}
+.imagen-respuesta{
+    width: 100px;
+    height: 100px;
+}
+
+.titulo-usuarioRespuesta{
+    color: var(--violet-ColdHeart);
+    font-size: 18px;
+    font-weight: 600px;
+    position: relative;
+    margin-left: 50px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.respuesta-usuarioRespuesta{
+    color: var(--black-SmoothCriminal);
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.hr-usuarioRespuesta{
+
+    text-align: center;
+
+}
+
+
+.FechaHora-Respuesta{
+    color: var(--gray-Creep);
+    font-size: 12px;
+    text-align: right;
+
+}
+
+.Editado-Respuesta{
+    color: var(--gray-Creep);
+    font-size: 12px;
+    text-align: right;
+
+}
+
+.IdEscondido{
+    width: 0.1px;       
+    height: 0.1px;         
+    opacity: 0;        
+    overflow: hidden;        
+    position: absolute;
+    z-index: -1;
+}
+
+#usuario{
+    width: 0.1px;       
+    height: 0.1px;         
+    opacity: 0;        
+    overflow: hidden;        
+    position: absolute;
+    z-index: -1;
+}
+
+.Modificar-usuarioRespuesta{
+    border: none;
+    display: block;
+    width: 12em;
+    font-weight: 400;
+    margin: 10px auto;
+    color: #EBEBEB;
+    height: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background: #a9a1e0;
+    border-radius: 8px;
+
+
+}
