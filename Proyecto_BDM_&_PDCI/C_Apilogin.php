@@ -19,10 +19,8 @@ class ApiLogin{
 
         echo'<script type="text/javascript">
         alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
-        document.getElementById('usuario').value =""
-        document.getElementById('contraseña').value =""
-
         </script>';
+        
     }
     }
 
@@ -44,10 +42,9 @@ class ApiLogin{
 
         echo'<script type="text/javascript">
         alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
-        document.getElementById('usuario').value =""
-        document.getElementById('contraseña').value =""
-
         </script>';
+
+        
         }
         
     }
@@ -70,10 +67,8 @@ class ApiLogin{
 
         echo'<script type="text/javascript">
         alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
-        document.getElementById('usuario').value =""
-        document.getElementById('contraseña').value =""
-
         </script>';
+        
         }
         
     }

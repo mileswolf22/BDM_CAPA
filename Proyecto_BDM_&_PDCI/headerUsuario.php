@@ -1,8 +1,4 @@
-<?php
-	session_start();
-    $_SESSION['US'] = $_REQUEST['usuario'];
-    
-?>
+
 <div class="loader"></div>
 
     <header>

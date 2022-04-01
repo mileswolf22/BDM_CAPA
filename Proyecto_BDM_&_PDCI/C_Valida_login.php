@@ -1,4 +1,5 @@
 <?php
+
 include_once 'C_database.php';
 
 class Login extends Database{

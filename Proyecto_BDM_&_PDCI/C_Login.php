@@ -1,7 +1,7 @@
 <?php
 session_start();
-    $Usuario_us = $_SESSION['US'] = $_REQUEST['usuario'];
-    $Password_us = $_SESSION['CON'] =$_REQUEST['contraseña'];
+    $Usuario_us  =  $_REQUEST['usuario'];
+    $Password_us =  $_REQUEST['contraseña'];
   
 $_SESSION['rol'] = $_REQUEST['tipoUsuario'];
 
@@ -11,11 +11,27 @@ if($_SESSION['rol'] == 'Lector'){
     $api = new ApiLogin();
     $api->loginUser($Usuario_us, $Password_us);
 
-}elseif($_SESSION['rol'] == 'Reportero'){
+}else{
+    //header("Location: index.php");
+    echo'<script type="text/javascript">
+        alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
+
+        </script>';
+};
+
+if($_SESSION['rol'] == 'Reportero'){
     $api = new ApiLogin();
     $api->loginUserReportero($Usuario_us, $Password_us);
 
-}elseif($_SESSION['rol'] == 'Editor'){
+}else{
+    //header("Location: index.php");
+    echo'<script type="text/javascript">
+        alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
+
+        </script>';
+};
+
+if($_SESSION['rol'] == 'Editor'){
     $api = new ApiLogin();
     $api->loginUserEditor($Usuario_us, $Password_us);
 
@@ -23,10 +39,8 @@ if($_SESSION['rol'] == 'Lector'){
     //header("Location: index.php");
     echo'<script type="text/javascript">
         alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
-        document.getElementById('usuario').value =""
-        document.getElementById('contraseña').value =""
 
         </script>';
-}
+};
 
 ?>

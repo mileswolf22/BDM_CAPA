@@ -140,7 +140,7 @@
         z-index: -1;
       }
 
-    img{
+    #imagenPrevisualizacion01{
     text-align: center;
     width: 265px;
     height: 265px;
@@ -324,7 +324,7 @@ video{
     }
 
 img{
-    width:100%;
+   
     background:var(--black-SmellsLikeTeenSpirit);
 }
 

@@ -27,7 +27,7 @@
 
 
     <body class="bodyRegistro">
-        <form class="login"  id='form_registro' action= 'C_Registro_usuario.php' method='Post'>
+        <form class="login"  id='form_registro' action= 'C_Registro_usuario.php' method='Post' enctype="multipart/form-data">
             <div class="form">
                 <h1>Registro</h1>
                 <div class="grupo">
@@ -46,17 +46,14 @@
                     <input type="file" name="imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" />
                  
                     <label class="foto-form" for="imagenPrevisualizacion">Foto de perfil</label>  
-                        <img id="imagenPrevisualizacion01" > 
-                       
-                    <div class="grupo">
-                    <input type="file" class="datos-form" id="image" name="image" multiple>
-                    </div>
-
-                    
-
+                        <img id="imagenPrevisualizacion01"  > 
+                        
                         <script src="js/script_ImagenPrevisualizacion.js"></script>
-                        <br>
+                        
                 </div>
+                
+                    
+                    
                 <div class="grupo">
                     <input type="text" name="correo" id="correo" required><span class="barra"></span>
                     <label class="datos-form" for="">Correo Electrónico</label>

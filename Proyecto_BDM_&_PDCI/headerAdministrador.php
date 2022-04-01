@@ -1,7 +1,4 @@
-<?php
-	session_start();
-    $_SESSION['US'] = 'usuario';
-?>
+
 <div class="loader"></div>
 
     <header>
@@ -10,7 +7,7 @@
                 <a href="Pagina_PerfilUsuario.php" class="">
                 <img class="imagen-perfilusuario" src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" width="60" height="60">
                 <h1 class="bienvenida_usuario"> Bienvenido</h1>
-                <h1 class="nombre_usuario" id="nombre_usuario"> <?php $_SESSION['US']?></h1> 
+                <h1 class="nombre_usuario" id="nombre_usuario"> usuario</h1> 
             </a></div>
             <abbr title="Dashboard Noticias"><a href="Pagina_DashboardAdmin.php" class="categoria" id="AdministrarNoticias"><img src="recursos/imagenes/iconos/time-solid-24.png"/></a></abbr>
             <b href="#"> | </b> 
