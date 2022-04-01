@@ -19,7 +19,7 @@ $(document).ready(function() {
 
         } else
         {
-            alert("Correo no valido");
+            alert("Correo no válido");
             document.getElementById('correo').value =""
         }
     

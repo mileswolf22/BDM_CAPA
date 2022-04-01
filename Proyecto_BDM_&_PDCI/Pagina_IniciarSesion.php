@@ -32,12 +32,16 @@
             <div class="form">
                 <h1>Iniciar Sesión</h1>
                 <br>
-                <label>Tipo de usuario:</label>
-                <SELECT name="tipoUsuario" id="tipoUsuario">
-                <OPTION value="Lector" selected>Lector</OPTION>
-                <OPTION value="Reportero">Reportero</OPTION>
-                <OPTION value="Editor">Editor</OPTION>
-                </SELECT >
+                <div class="grupo">
+                    <h4>Tipo de usuario:</h4>
+                    
+                    <SELECT name="tipoUsuario" class="categorias-select" id="tipoUsuario">
+                       <OPTION value="Lector" selected>Lector</OPTION>
+                       <OPTION value="Reportero">Reportero</OPTION>
+                       <OPTION value="Editor">Editor</OPTION>
+                    </SELECT >
+                    <br><br>
+                </div>
                 <div class="grupo">
         
                     <input type="text" name="usuario" id="usuario" required><span class="barra"></span>

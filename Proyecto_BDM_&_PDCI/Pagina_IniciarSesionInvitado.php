@@ -33,11 +33,12 @@
                 </ul>
                 </div>  
                 <br>
-                <button type="submit" class="boton-iniciarsesion">Ingresar De Todos Modos</button>          
+                <a class = "a-CrearCuenta" href="Pagina_RegistroUsuario.php">Haz clic aqui para crear una cuenta</a>
+                          
 
             </div>
 
-            <a class = "boton-crearcuentaInvitado" href="Pagina_RegistroUsuario.php">Haz clic aqui para crear una cuenta</a>
+            <button type="submit" class="boton-iniciarsesionInvitado">Ingresar De Todos Modos</button>
         </form>               
 
         

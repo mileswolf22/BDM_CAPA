@@ -17,7 +17,7 @@ $(document).ready(function() {
 
         } else
         {
-            alert("Usuario no valido: El usuario debe de ser de minimo 9 a maximo 15 caracteres que solo contengan letras y numeros");
+            alert("Usuario no válido: El usuario debe de ser de mínimo 9 a máximo 15 carácteres que solo contengan letras y números");
             document.getElementById('usuario').value =""
         }
     }

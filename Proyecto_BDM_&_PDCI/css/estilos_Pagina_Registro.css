@@ -234,6 +234,31 @@ h2{
     padding: 0px 0px 0px 60px
 }
 
+.boton-iniciarsesionInvitado{
+    color: var(--gray-TheScientist);
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    text-align: center;
+    background: none;
+}
+
+.a-CrearCuenta{
+    background: var(--violet-ColdHeart);        
+    border: none;
+    display: block;
+    width: 19em;
+    margin: 10px auto;
+    color: var(--white-AllOfMe);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
 /* ///////////////////////////////////// Pagina Buscar*/
 
 h5{

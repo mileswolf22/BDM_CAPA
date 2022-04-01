@@ -18,6 +18,7 @@
     <script src="js/script_ValidadorFecha.js"></script>
     <script src="js/script_ValidadorNumeroTelefonico.js"></script>
     <script src="js/script_ValidadorUsuario.js"></script>
+    <script src="js/script_ValidadorNombre.js"></script>
     
 </head>
 
@@ -43,8 +44,8 @@
                     <label class="datos-form" for="">Nombre Completo</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="numeroContacto" pattern="[0-9]{10}" title="El numero debe ser a 10 digitos" required><span class="barra"></span>
-                    <label class="datos-form" for="">Numero De Contacto</label>
+                    <input type="text" name="" id="numeroContacto" pattern="[0-9]{10}" title="El número debe ser a 10 dígitos" required><span class="barra"></span>
+                    <label class="datos-form" for="">Número De Contacto</label>
                 </div>
                 <div class="grupo">
                     <h4>Fecha de nacimiento</h4>
@@ -57,14 +58,14 @@
                 </div>
                 <div class="grupo">
                     <input type="text" name="" id="correo" required><span class="barra"></span>
-                    <label class="datos-form" for="">Correo Electronico</label>
+                    <label class="datos-form" for="">Correo Electrónico</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="usuario" title="El usuario debe de ser de minimo 9 a maximo 15 caracteres que solo contengan letras y numeros" required><span class="barra"></span>
+                    <input type="text" name="" id="usuario" title="El usuario debe de ser de mínimo 9 a máximo 15 carácteres que solo contengan letras y números" required><span class="barra"></span>
                     <label class="datos-form" for="">Usuario</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="contraseña"  title= "La contraseña debe de tener: 8 caracteres, 1 numero, 1 mayuscula, 1 caracter especial (¡”#$%&/=’?¡¿:;,.-_+*{][}) y sin espacios en blanco" onclick="ContraseñaOnclick()" required>
+                    <input type="text" name="" id="contraseña"  title= "La contraseña debe de tener: 8 cáracteres, 1 número, 1 mayúscula, 1 minúscula, 1 carácter especial (¡”#$%&/=’?¡¿:;,.-_+*{][}) y sin espacios en blanco" onclick="ContraseñaOnclick()" required>
                     <span class="barra"></span>
                     <label class="datos-form" for="">Contraseña</label>
                 </div>

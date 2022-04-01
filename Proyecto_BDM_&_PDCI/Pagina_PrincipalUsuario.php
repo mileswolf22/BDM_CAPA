@@ -1,4 +1,8 @@
 
+<?php
+      session_start();
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,7 +24,26 @@
     <body class="hidden">
 
 <!-- ?php  include ('./headerUsuario.php')? -->
-     <?php  include ('./headerAdministrador.php')?>
+     <?php  
+     
+     $RolUsuario = $_SESSION['RolHeader'];
+     
+     switch ( $RolUsuario ) {
+       case 'Editor':
+        include ('./headerAdministrador.php');
+         break;
+       case 'Reportero':
+         include ('./headerAdministrador.php');
+          break;
+       case 'Usuario':
+        include ('./headerUsuario.php');
+         break;
+        default:
+        include ('./headerUsuarioNoLoggeado.php');
+        break;
+      }
+    
+     ?>
 
 <main>
 

@@ -20,7 +20,13 @@ if($_SESSION['rol'] == 'Lector'){
     $api->loginUserEditor($Usuario_us, $Password_us);
 
 }else{
-    header("Location: index.php");
+    //header("Location: index.php");
+    echo'<script type="text/javascript">
+        alert("Usuario o contraseña no válido: Por favor revisa que tus datos esten bien e inténtalo de nuevo");
+        document.getElementById('usuario').value =""
+        document.getElementById('contraseña').value =""
+
+        </script>';
 }
 
 ?>

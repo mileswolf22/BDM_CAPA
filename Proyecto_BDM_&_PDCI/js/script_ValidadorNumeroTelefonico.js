@@ -17,7 +17,7 @@ $(document).ready(function() {
 
         } else
         {
-            alert("Numero no valido: Debe de ser a 10 digitos.");
+            alert("Número no válido: Debe de ser a 10 digitos.");
             document.getElementById('numeroContacto').value =""
         }
     }
