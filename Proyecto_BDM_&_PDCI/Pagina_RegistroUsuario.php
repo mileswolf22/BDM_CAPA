@@ -1,4 +1,6 @@
+<?php
 
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -27,6 +29,7 @@
 
 
     <body class="bodyRegistro">
+        
         <form class="login"  id='form_registro' action= 'C_Registro_usuario.php' method='Post' enctype="multipart/form-data">
             <div class="form">
                 <h1>Registro</h1>
@@ -43,11 +46,9 @@
                     <input type="date" name="fecha-nacimiento" id="fecha-nacimiento" required>
 
 
-                    <input type="file" name="imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" />
-                 
+                    <input type="file" name="imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" required/>
                     <label class="foto-form" for="imagenPrevisualizacion">Foto de perfil</label>  
                         <img id="imagenPrevisualizacion01"  > 
-                        
                         <script src="js/script_ImagenPrevisualizacion.js"></script>
                         
                 </div>
@@ -61,6 +62,54 @@
                 <div class="grupo">
                     <input type="text" name="usuario" id="usuario" title="El usuario debe de ser de mínimo 9 a máximo 15 caracteres que solo contengan letras y números" required><span class="barra"></span>
                     <label class="datos-form" for="">Usuario</label>
+
+                    <!--
+                    <button type="button" class="foto-form" >Verificar Usuario</button>
+
+                
+                    <script type="text/javascript">
+
+
+                        $(document).ready(function(){
+                         
+                         var consulta;
+                                
+                         //hacemos focus
+                         $("#usuario").focus();
+                                                                    
+                         //comprobamos si se pulsa una tecla
+                         $("#usuario").keyup(function(e){
+                                //obtenemos el texto introducido en el campo
+                                consulta = $("#usuario").val();
+                                                         
+                       
+                                           $.ajax({
+                                                 type: "POST",
+                                                 url: "C_ValidarUsuario.php",
+                                                 data: "b="+consulta,
+                                                 dataType: "html",
+                                                 error: function(){
+                                                    //   alert("error petición ajax");
+                                                 },
+                                                 success: function(data){                                                      
+                                                   // alert("Se logro wuuu");
+                                                 }
+                                                   });
+                                             
+                        });
+                    });
+
+              
+
+                 
+
+                        </script>
+                    
+                          -->
+                    
+                   
+                   
+
                 </div>
                 <div class="grupo">
                     <input type="text" name="contraseña" id="contraseña"  title= "La contraseña debe de tener: 8 carácteres, 1 número, 1 mayúscula, 1 minúscula, 1 carácter especial (¡”#$%&/=’?¡¿:;,.-_+*{][}) y sin espacios en blanco" onclick="ContraseñaOnclick()" required>

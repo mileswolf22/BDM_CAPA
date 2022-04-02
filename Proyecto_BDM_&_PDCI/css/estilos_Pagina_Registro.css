@@ -119,13 +119,14 @@
         top: -10px;
     }
  
-    .foto-form {     
-        text-align: center;
-        color: var(--white-AllOfMe);
+    .foto-form {
+        top: -14px;
+        font-size: 12px;
+        color: var(--gray-TheScientist);
         background-color: var(--gray-Up);
         display: block;
         padding: .5em 1em;
-        width: 20em;
+        width: 25em;
         text-align: center;
     }
      

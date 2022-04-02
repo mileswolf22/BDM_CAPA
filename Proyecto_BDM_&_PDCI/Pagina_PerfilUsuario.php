@@ -1,5 +1,22 @@
+<?php
+session_start();
+$con=mysqli_connect('localhost','root','root','notidb');
 
+$temp = $_SESSION["US"];
+$query_mostrar = "CALL Mostrar_Usuario('$temp')";
+$result = mysqli_query ($con, $query_mostrar);
+    
+    while($row = mysqli_fetch_row($result))
+    {   
+        $_SESSION['nom_us']             = $row[0]; 
+        $_SESSION['nom_com']            = $row[1]; 
+        base64_encode($_SESSION['foto']               = $row[2]);
+        $_SESSION['correo']             = $row[3];
+        $_SESSION['num_contact']        = $row[4];
+        $_SESSION['fecha']             = $row[5];
 
+    }
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -23,7 +40,26 @@
     <body>
 
 
-    <?php  include ('./headerUsuario.php')?>
+    <?php  
+     
+     $RolUsuario = $_SESSION['RolHeader'];
+     
+     switch ( $RolUsuario ) {
+       case 'Editor':
+        include ('./headerAdministrador.php');
+         break;
+       case 'Reportero':
+         include ('./headerAdministrador.php');
+          break;
+       case 'Usuario':
+        include ('./headerUsuario.php');
+         break;
+        default:
+        include ('./headerUsuarioNoLoggeado.php');
+        break;
+      }
+    
+     ?>
 
 <main>
 
@@ -38,13 +74,14 @@
             <div class="contenedor-PreguntasScrollPerfil">
                 <div class ="grupo-preguntaPerfil">                    
                     <div class="pregunta-fondoPerfil">  
-                        <img id="imagen-descripcionPerfil" src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg"> 
+                        <img style="max-height: 200px" id="imagen-descripcionPerfil" src="data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>"> 
                         <h3 id="MiPerfilTitulo">Mi Perfil</h3>                                 
-                        <h4 id="UsuarioPerfil">AryMistery</h4> 
-                        <h3 id="NombrePerfil"> Leslie Sarahy Cazares Mendoza</h3> 
-                        <h3 id="CorreoPerfil">sarycazares@live.com.mx</h3>
-                        <h3 id="FechaNacimientoPerfil">14/07/1998</h3>                       
+                        <h4 id="UsuarioPerfil"><?php echo $_SESSION["US"];?></h4> 
+                        <h3 id="NombrePerfil"> <?php  echo $_SESSION["nom_com"];?></h3>                                      
+                        <h3 id="CorreoPerfil"><?php  echo $_SESSION["correo"];?></h3>
+                        <h3 id="FechaNacimientoPerfil"><?php  echo $_SESSION["fecha"];?></h3>                       
                         <a href="Pagina_ModificarPerfilUsuario.php">Modificar Perfil</a>
+                        <a href="Pagina_ModificarFotoPerfil.php">Modificar Foto</a>
                         <a href="Pagina_BajaUsuarioEditor.php"> Eliminar Usuario</a>                     
                         <br>                   
                     </div>                                        

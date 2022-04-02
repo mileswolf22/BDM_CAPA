@@ -1,8 +1,7 @@
 <?php
 include_once 'C_database.php';
 
-class Registro extends Database{
-    
+class Modificar extends Database{
     private  $Usuario;
     private  $Password;
     private  $Foto;
@@ -11,40 +10,28 @@ class Registro extends Database{
     private  $Numero_contacto;
     private  $FechaNacimiento;
 
+     function Modificar_US($Usuario, $Nombre_completo, $Numero_contacto, $FechaNacimiento, $Correo, $Password){
   
-
-
-    function Registro($Usuario, $Password, $binariosImagen, $Nombre_completo, $Correo, $Numero_contacto, $FechaNacimiento){
-   
-       
-      
-         
-
          $con=mysqli_connect('localhost','root','root','notidb');
+ 
+    $query = $this->conectar()->query("CALL Modificar_Usuario('$Usuario','$Nombre_completo', '$Numero_contacto', '$FechaNacimiento', '$Correo', '$Password');");
+    echo'<script type="text/javascript">
+    alert("El usuario ha sido modificadoS");
 
-         $binariosImagen=mysqli_escape_string($con, $binariosImagen);
-        
-        
-        
-        $query = $this->conectar()->query("CALL AgregarUsuario('$Usuario','$Password','$binariosImagen','$Nombre_completo','$Correo','$Numero_contacto','$FechaNacimiento');");
-        echo'<script type="text/javascript">
-        alert("El usuario ha sido registrado");
-
-        </script>';
-    header("Location: index.php");
+    </script>';
+    header("Location: Pagina_PerfilUsuario.php");
         return $query;
     }
 }	
 
     $Usuario         = $_POST['usuario'];
     $Password        = $_POST['contraseña'];
-    
     $Nombre_completo = $_POST['nombre'];
     $Correo          = $_POST['correo'];
     $Numero_contacto = $_POST['numeroContacto'];
     $FechaNacimiento = $_POST['fecha-nacimiento'];
 
-        $tipoarchivo=$_FILES['imagenPrevisualizacion']['name'];
+        /*$tipoarchivo=$_FILES['imagenPrevisualizacion']['name'];
        
        
          $nombrearchivo=$_FILES['imagenPrevisualizacion']['name'];
@@ -56,7 +43,7 @@ class Registro extends Database{
          $imagensubida=fopen($_FILES['imagenPrevisualizacion']['tmp_name'], 'r');
         
       
-         $binariosImagen=fread($imagensubida, $tamanoarchivo);
+         $binariosImagen=fread($imagensubida, $tamanoarchivo);*/
 /*
     echo $Usuario;
     echo $Password;
@@ -66,8 +53,8 @@ class Registro extends Database{
     echo $Numero_contacto;
     echo $FechaNacimiento;
 */
-    $Regis = new Registro();
-    $Regis->Registro($Usuario, $Password, $binariosImagen, $Nombre_completo, $Correo, $Numero_contacto, $FechaNacimiento);
+    $Modif = new Modificar();
+    $Modif->Modificar_US($Usuario, $Nombre_completo, $Numero_contacto, $FechaNacimiento, $Correo, $Password);
 
 
 ?>

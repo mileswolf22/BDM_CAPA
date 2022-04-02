@@ -3,7 +3,12 @@
     $_SESSION['rol'] = '';
     $_SESSION['US'] = '';
     $_SESSION['CON'] = '';
-    
+    $_SESSION['nom_us'] = '';           
+    $_SESSION['nom_com']  = '';           
+    $_SESSION['foto']     = '';           
+    $_SESSION['correo']     = '';         
+    $_SESSION['num_contact']   = '';     
+    $_SESSION['$fecha']  = '';
 ?>
 
 <!DOCTYPE html>
