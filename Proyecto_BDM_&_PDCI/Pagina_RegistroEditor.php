@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+$_SESSION['rolElegido'] = '';
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -27,7 +30,7 @@
 
 
     <body class="bodyRegistro">
-        <form action="Pagina_DashboardAdmin.php" method="GET" id="form">
+    <form class="login"  id='form_registro' action= 'C_RegistrarAdmin.php' method='Post' enctype="multipart/form-data">
             <div class="form">
                 <h1>Registro</h1>
                 <br>
@@ -40,32 +43,32 @@
                     <br><br>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="nombre" required><span class="barra"></span>
+                    <input type="text" name="nombre" id="nombre" required><span class="barra"></span>
                     <label class="datos-form" for="">Nombre Completo</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="numeroContacto" pattern="[0-9]{10}" title="El número debe ser a 10 dígitos" required><span class="barra"></span>
+                    <input type="text" name="numeroContacto" id="numeroContacto" pattern="[0-9]{10}" title="El número debe ser a 10 dígitos" required><span class="barra"></span>
                     <label class="datos-form" for="">Número De Contacto</label>
                 </div>
                 <div class="grupo">
                     <h4>Fecha de nacimiento</h4>
-                    <input type="date" name="" id="fecha-nacimiento" required>
-                    <input type="file" id="imagenPrevisualizacion" accept="image/*" />
+                    <input type="date" name="fecha-nacimiento" id="fecha-nacimiento" required>
+                    <input type="file" name = "imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" />
                     <label class="foto-form" for="imagenPrevisualizacion">Foto de perfil</label>  
                         <img id="imagenPrevisualizacion01" >
                         <script src="js/script_ImagenPrevisualizacion.js"></script>
                         <br>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="correo" required><span class="barra"></span>
+                    <input type="text" name="correo" id="correo" required><span class="barra"></span>
                     <label class="datos-form" for="">Correo Electrónico</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="usuario" title="El usuario debe de ser de mínimo 9 a máximo 15 carácteres que solo contengan letras y números" required><span class="barra"></span>
+                    <input type="text" name="usuario" id="usuario" title="El usuario debe de ser de mínimo 9 a máximo 15 carácteres que solo contengan letras y números" required><span class="barra"></span>
                     <label class="datos-form" for="">Usuario</label>
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="contraseña"  title= "La contraseña debe de tener: 8 cáracteres, 1 número, 1 mayúscula, 1 minúscula, 1 carácter especial (¡”#$%&/=’?¡¿:;,.-_+*{][}) y sin espacios en blanco" onclick="ContraseñaOnclick()" required>
+                    <input type="text" name="contraseña" id="contraseña"  title= "La contraseña debe de tener: 8 cáracteres, 1 número, 1 mayúscula, 1 minúscula, 1 carácter especial (¡”#$%&/=’?¡¿:;,.-_+*{][}) y sin espacios en blanco" onclick="ContraseñaOnclick()" required>
                     <span class="barra"></span>
                     <label class="datos-form" for="">Contraseña</label>
                 </div>

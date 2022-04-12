@@ -8,12 +8,12 @@ $result = mysqli_query ($con, $query_mostrar);
     
     while($row = mysqli_fetch_row($result))
     {   
-        $_SESSION['nom_us']             = $row[0]; 
-        $_SESSION['nom_com']            = $row[1]; 
-        base64_encode($_SESSION['foto']               = $row[2]);
-        $_SESSION['correo']             = $row[3];
-        $_SESSION['num_contact']        = $row[4];
-        $_SESSION['fecha']             = $row[5];
+        $_SESSION['nom_us']                             = $row[0]; 
+        $_SESSION['nom_com']                            = $row[1]; 
+        base64_encode($_SESSION['foto']                 = $row[2]);
+        $_SESSION['correo']                             = $row[3];
+        $_SESSION['num_contact']                        = $row[4];
+        $_SESSION['fecha']                              = $row[5];
 
     }
 ?>

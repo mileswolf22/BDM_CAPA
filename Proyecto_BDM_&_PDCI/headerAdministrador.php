@@ -1,13 +1,31 @@
+<?php
+session_start();
+$con=mysqli_connect('localhost','root','root','notidb');
 
+$temp = $_SESSION["US"];
+$query_mostrar = "CALL Mostrar_Usuario('$temp')";
+$result = mysqli_query ($con, $query_mostrar);
+    
+    while($row = mysqli_fetch_row($result))
+    {   
+        $_SESSION['nom_us']             = $row[0]; 
+        $_SESSION['nom_com']            = $row[1]; 
+        base64_encode($_SESSION['foto']               = $row[2]);
+        $_SESSION['correo']             = $row[3];
+        $_SESSION['num_contact']        = $row[4];
+        $_SESSION['fecha']             = $row[5];
+
+    }
+?>
 <div class="loader"></div>
 
     <header>
         <nav class="nav-menu">
             <div class="usuariobienvenida">
                 <a href="Pagina_PerfilUsuario.php" class="">
-                <img class="imagen-perfilusuario" src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" width="60" height="60">
+                <img class="imagen-perfilusuario" src="data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>" width="60" height="60">
                 <h1 class="bienvenida_usuario"> Bienvenido</h1>
-                <h1 class="nombre_usuario" id="nombre_usuario"> usuario</h1> 
+                <h1 class="nombre_usuario" id="nombre_usuario"> <?php echo $_SESSION["US"];?> </h1> 
             </a></div>
             <abbr title="Dashboard Noticias"><a href="Pagina_DashboardAdmin.php" class="categoria" id="AdministrarNoticias"><img src="recursos/imagenes/iconos/time-solid-24.png"/></a></abbr>
             <b href="#"> | </b> 

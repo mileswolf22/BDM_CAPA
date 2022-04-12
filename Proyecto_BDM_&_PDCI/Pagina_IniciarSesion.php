@@ -9,6 +9,8 @@
     $_SESSION['correo']     = '';         
     $_SESSION['num_contact']   = '';     
     $_SESSION['$fecha']  = '';
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +59,8 @@
                     <label class="datos-form" for="">Contraseña</label>
                 </div>    
                 <br>
+
+                
                 
             </div>
 
