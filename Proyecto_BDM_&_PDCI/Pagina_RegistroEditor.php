@@ -1,6 +1,31 @@
 <?php
 session_start();
 $_SESSION['rolElegido'] = '';
+
+
+if (isset($_SESSION['SoyUnRobot'])){
+
+    if ($_SESSION['SoyUnRobot'] == "NoEsRobot")
+    {
+        echo'<script type="text/javascript">
+            console.log("No es robot");
+            </script>';
+    } else {
+
+        echo'<script type="text/javascript">
+            alert("¿Eres un robot? Intentalo de nuevo c:");
+            </script>';
+            $_SESSION['SoyUnRobot'] = "NoEsRobot";
+    }
+    
+} else{
+
+    echo'<script type="text/javascript">
+            console.log("No ha hecho nada");
+            </script>';
+}
+
+
 ?>
 <!DOCTYPE html>
 
@@ -22,6 +47,8 @@ $_SESSION['rolElegido'] = '';
     <script src="js/script_ValidadorNumeroTelefonico.js"></script>
     <script src="js/script_ValidadorUsuario.js"></script>
     <script src="js/script_ValidadorNombre.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js?render=6Lc9y2cfAAAAAM9UqsURq4txmASupJwWrI8ogzm1'> </script>
     
 </head>
 
@@ -53,8 +80,11 @@ $_SESSION['rolElegido'] = '';
                 <div class="grupo">
                     <h4>Fecha de nacimiento</h4>
                     <input type="date" name="fecha-nacimiento" id="fecha-nacimiento" required>
-                    <input type="file" name = "imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" />
-                    <label class="foto-form" for="imagenPrevisualizacion">Foto de perfil</label>  
+                    
+                    <div id="inputFileImg">
+                    <input type="file" name="imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" required/>
+                    <label class="foto-form" id="foto-form" for="imagenPrevisualizacion">Foto de perfil</label> 
+                   </div>    
                         <img id="imagenPrevisualizacion01" >
                         <script src="js/script_ImagenPrevisualizacion.js"></script>
                         <br>
@@ -76,7 +106,24 @@ $_SESSION['rolElegido'] = '';
                     <input type="text" name="" id="confirmarcontraseña" required>
                     <span class="barra"></span>
                     <label class="datos-form" for="">Confirmar Contraseña</label>
-                </div>   
+                </div> 
+                <div class="grupo">
+                  <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" value="19BS">
+                  <script>
+
+                     setTimeout(Recaptcha, 30000);
+
+                    function Recaptcha() {
+                       grecaptcha.ready( function() {
+                       grecaptcha.execute('6Lc9y2cfAAAAAM9UqsURq4txmASupJwWrI8ogzm1', {action: 'ejemplo'})
+                       .then(function(token) {
+                          var recaptchaResponse = document.getElementById('recaptchaResponse');
+                          recaptchaResponse.value = token;
+                       });});
+
+                    }
+                  </script>
+                </div>  
                 <button type="submit">Registrarme</button>
             </div>
         </form>               

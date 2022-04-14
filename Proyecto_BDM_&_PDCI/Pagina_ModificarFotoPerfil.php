@@ -40,8 +40,12 @@ $result = mysqli_query ($con, $query_mostrar);
                 <h1>Modificar Foto Perfil</h1>
                 <div class="grupo">
                 <input id="usuario" name="usuario" type="hidden" value = <?php echo $_SESSION["US"];?>>
-                <input type="file" name="imagenPrevisualizacion"id="imagenPrevisualizacion" accept="image/*" />
-                    <label class="foto-form" for="imagenPrevisualizacion">Foto de perfil</label>  
+                
+                <div id="inputFileImg">
+                    <input type="file" name="imagenPrevisualizacion" id="imagenPrevisualizacion" accept="image/*" required/>
+                    <label class="foto-form" id="foto-form" for="imagenPrevisualizacion">Foto de perfil</label> 
+                   </div>    
+                   
                     <img style="max-height: 200px" id="imagenPrevisualizacion01" src="data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>">
                         <script src="js/script_ImagenModificar.js"></script>
                         <br>

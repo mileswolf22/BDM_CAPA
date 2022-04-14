@@ -13,7 +13,24 @@ $(document).ready(function() {
         var reg=/^(?=.*[a-zA-Z0-9]).{9,15}$/g; 
         if (texto.match(reg)) { 
      
-           // alert("Me activaste");
+            alert("Me activaste");
+            $.ajax({
+                type : 'POST',
+                url  : 'C_ValidarUsuario.php',
+                data : $(this).serialize(),
+                error:  alert("Marco algun Error"),
+                success : function(data){
+                    if(data == "UsuarioDisponible"){
+                                        
+                        alert("Usuario Disponible");
+
+                    } else if (data == "UsuarioNoDisponible") {
+
+                        alert("Usuario No Disponible");
+                        document.getElementById('usuario').value ="";
+                    }
+                }
+            });
 
         } else
         {

@@ -20,14 +20,8 @@ function comprobar($b) {
     }
      
     if($contar == 0){
-        echo'<script type="text/javascript">
-        alert("Este usuario no se encuentra disponible");
-
-        </script>';
+        echo'UsuarioNoDisponible';
     }else{
-        echo'<script type="text/javascript">
-        alert("Este Usuario es valido");
-
-        </script>';
+        echo'UsuarioDisponible';
 }     
 ?>

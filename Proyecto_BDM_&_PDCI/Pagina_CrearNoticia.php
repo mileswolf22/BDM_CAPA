@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/script_Loader.js"></script>
     <script src="js/script_ValidacionPalabrasClave.js"></script>
+    <script src="js/script_ControladorVideo.js"></script>
     <script src="bootstrap-5.1.3-dist/js/bootstrap.js"></script>
     
 </head>
@@ -49,57 +50,52 @@
                     <textarea class="detalle-textarea" name="texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
-                    <input type="file" id="imagenPrevisualizacion" accept="image/*" />
-                    <label class="foto-form" for="imagenPrevisualizacion">Imagenes</label>  
-                        <br>
+                   <div id="inputFileImg">
+                     <input type="file" id="imagenPrevisualizacion" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
+                     <label class="foto-form" id="foto-form" for="imagenPrevisualizacion">Imagenes</label>
+                   </div>
 
-                <div class="VideoFoto-Grupo">
+                   <input type="hidden" name="TotalImg" id="TotalImg" value="0">
+
+                  <div class="VideoFoto-Grupo">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="recursos/imagenes/diseño1.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-inner" id="carousel-innerImg">
+                      <div class="carousel-item active">
+                        <img src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" id="imgPrev_0" class="d-block w-100">
+                     </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="recursos/imagenes/diseño2.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="recursos/imagenes/diseño3.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" id="CarruselImgNext"data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" id="CarruselImgNext"data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+                    <button class="carousel-control-prev" type="button" id="CarruselImgNext"data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Previous</span>
+                   </button>
+                    <button class="carousel-control-next" type="button" id="CarruselImgNext"data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Next</span>
+                    </button>
+                   </div>
 
-            </div>
+                  
+                  </div>
 
+                  <script src="js/script_ImagenPrevisualizacionCarrusel.js"></script>
+                   <br>
                 </div>
+
                 <div class="grupo">
 
-                <div class="VideoFoto-Grupo">
-                    <input type="file" id="imagenPrevisualizacion" accept="image/*" />
-                    <label class="foto-form" for="imagenPrevisualizacion">Videos</label>  
-                        <br>
+                 <div id="inputFileVideo">
+                     <input type="file" id="videoPrevisualizacion" accept="video/mp4" onchange="VideoPrevChange(this);" required multiple />
+                     <label class="foto-form" id="video-form" for="videoPrevisualizacion">Videos</label>
+                 </div>
 
-                        <div id="carouselExampleFade" class="carousel slide" data-bs-interval="false">
-                      <div class="carousel-inner">
+
+                 <input type="hidden" name="TotalVideos" id="TotalVideos" value="0">
+
+                    <div class="VideoFoto-Grupo">      
+                     <div id="carouselExampleFade" class="carousel slide" data-bs-interval="false">
+                      <div class="carousel-inner" id="carousel-innerVideo">
                           <div class="carousel-item active">
-                              <video class="videoPlayer" id="videoPlayer" height="340" controls >
-                                  <source src="./recursos/videos/Big_Enough.mp4" type="video/mp4">
-                              </video>
-                          </div>
-                          <div class="carousel-item">
-                              <video class="videoPlayer" height="340" controls>
-                                  <source src="./recursos/videos/Nyan_Cat.mp4" type="video/mp4">
-                              </video>
-                          </div>
-                          <div class="carousel-item"> 
-                              <video class="videoPlayer" height="340" controls>
+                              <video class="videoPlayer" id="videoPlayer_0" height="340" controls >
                                   <source src="./recursos/videos/Jinjo_Wii_BanjoKazooie.mp4" type="video/mp4">
                               </video>
                           </div>
@@ -112,10 +108,13 @@
                           <span class="carousel-control-next-icon"   onclick="PausaVideo();" aria-hidden="true"></span>
                           <span class="visually-hidden">Next</span>
                       </button>
-                  </div>
+                   </div>
 
                   </div>
                         
+                  <script src="js/script_VideoPrevisualizacionCarrusel.js"></script>
+                   <br>
+
                 </div>
                 <div class="grupo">
                     <input type="text" name="" id="Etiqueta" placeholder="Escribe tu etiqueta sin #">
