@@ -45,6 +45,8 @@ el_div.setAttribute('class', 'carousel-item active');
 var el_img=document.createElement('img');
 el_img.setAttribute('class', 'd-block w-100');
 el_img.setAttribute('id', 'imgPrev_0');
+el_img.style.width = '100%';
+el_img.style.height = '256px';
 el_img.src = 'recursos/imagenes/Fotos_Perfil/gatico_01.jpg';
 el_div.appendChild(el_img);
 document.getElementById('carousel-innerImg').appendChild(el_div);
@@ -80,6 +82,8 @@ el_div.setAttribute('class', 'carousel-item');
 
 var el_img=document.createElement('img');
 el_img.setAttribute('class', 'd-block w-100');
+el_img.style.width = '100%';
+el_img.style.height = '256px';
 el_img.setAttribute('id', 'imgPrev_'+i);
 el_img.src = objectURL;
 

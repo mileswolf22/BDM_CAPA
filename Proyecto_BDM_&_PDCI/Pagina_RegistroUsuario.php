@@ -156,7 +156,7 @@ if (isset($_SESSION['SoyUnRobot'])){
                   <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" value="19BS">
                   <script>
 
-                     setTimeout(Recaptcha, 30000);
+                     setTimeout(Recaptcha, 15000);
 
                     function Recaptcha() {
                        grecaptcha.ready( function() {

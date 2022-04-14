@@ -61,7 +61,7 @@
                         <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
                     <div class="carousel-inner" id="carousel-innerImg">
                       <div class="carousel-item active">
-                        <img src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" id="imgPrev_0" class="d-block w-100">
+                        <img src="recursos/imagenes/Fotos_Perfil/gatico_01.jpg" height="256" width="100%" id="imgPrev_0" class="d-block w-100">
                      </div>
                     </div>
                     <button class="carousel-control-prev" type="button" id="CarruselImgNext"data-bs-target="#carouselExampleControls" data-bs-slide="prev">
