@@ -23,12 +23,12 @@
 <body class="bodyCrearNoticia">
 <div class="loader"></div>
 
-<form action="Pagina_ResultadoBuscar.html" method="GET" id="form">
+<form action="Pagina_ResultadoBuscar.html" method="GET" id="form" enctype='multipart/form-data'>
 <div class="form">
                 <h1>Agregar Noticia</h1>
                 <br>
                 <div class="grupo">
-                    <input type="text" name="" id="Lugar" required><span class="barra"></span>
+                    <input type="text" name="Lugar" id="Lugar" required><span class="barra"></span>
                     <label class="datos-form" for="">Lugar Del Acontecimiento</label>
                 </div>
                 <div class="grupo">
@@ -36,22 +36,22 @@
                     <input type="datetime-local" name="FechaHora">
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="Titulo" required><span class="barra"></span>
+                    <input type="text" name="Titulo" id="Titulo" required><span class="barra"></span>
                     <label class="datos-form" for="">Titulo</label>
                 </div>
                 <div class="grupo">
                     <h4>Descripción Breve</h4>
                     <br>
-                    <textarea class="detalle-textarea" name="texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" name="Descripcion" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                     <h4>Texto</h4>
                     <br>
-                    <textarea class="detalle-textarea" name="texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                    <div id="inputFileImg">
-                     <input type="file" id="imagenPrevisualizacion" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
+                     <input type="file[]" id="imagenPrevisualizacion" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
                      <label class="foto-form" id="foto-form" for="imagenPrevisualizacion">Imagenes</label>
                    </div>
 
@@ -84,7 +84,7 @@
                 <div class="grupo">
 
                  <div id="inputFileVideo">
-                     <input type="file" id="videoPrevisualizacion" accept="video/mp4" onchange="VideoPrevChange(this);" required multiple />
+                     <input type="file[]" id="videoPrevisualizacion" accept="video/mp4" onchange="VideoPrevChange(this);" required multiple />
                      <label class="foto-form" id="video-form" for="videoPrevisualizacion">Videos</label>
                  </div>
 
@@ -117,7 +117,7 @@
 
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="Etiqueta" placeholder="Escribe tu etiqueta sin #">
+                    <input type="text" name="Etiqueta" id="Etiqueta" placeholder="Escribe tu etiqueta sin #">
                     <label class="datos-form" for="">Palabras Clave</label><span class="barra"></span>
                 </div>  
                 <div class="grupo">
@@ -125,21 +125,21 @@
                     <button type="button" onclick="EliminarEtiquetaBusquedaFuncion();" id="EliminarEtiqueta">Eliminar Etiqueta</button> 
                 </div>
                 <div class="grupo">
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="EtiquetaPrincipal" id="menuEtiquetas"> 
                         <option selected>...</option>
                     </select>
                     <br><br>
                 </div> 
                 <div class="grupo">
                 <h4>Sección Principal</h4>
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="EtiquetaSecundaria1" id="menuEtiquetas"> 
                         <option selected>...</option>
                     </select>
                     <br><br>
                 </div>
                 <div class="grupo">
                 <h4>Secciones Secundarias</h4>
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="EtiquetaSecundaria2" id="menuEtiquetas"> 
                         <option selected>...</option>
                     </select>
                     <br><br>

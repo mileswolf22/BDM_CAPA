@@ -79,7 +79,7 @@ class Registro extends Database{
     private  $Correo;
     private  $Numero_contacto;
     private  $FechaNacimiento;
-
+ 
   
 
 

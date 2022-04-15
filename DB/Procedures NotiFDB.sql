@@ -37,7 +37,7 @@ BEGIN
 	UPDATE Usuario SET Anonimo = 0;
 END$$
 
-USE NotiDB;
+
 DELIMITER $$
 CREATE PROCEDURE Agregar_Periodista(/*Procedure para agregar periodistas siempre y cuando el usuario sea editor*/
 IN pUsuario varchar(30),
@@ -135,7 +135,7 @@ SELECT
 
 END $$
 
-USE notidb;
+
 DELIMITER $$
 CREATE PROCEDURE LogReportero( /*Procedure para ingreso de usuario comun*/
 IN pUsuario varchar (30),
@@ -158,7 +158,7 @@ SELECT
    
 END $$
 
-USE notidb;
+
 DELIMITER $$
 CREATE PROCEDURE LogEditor( /*ProceLogReporteroLogReporterodure para ingreso de usuario comun*/
 IN pUsuario varchar (30),
