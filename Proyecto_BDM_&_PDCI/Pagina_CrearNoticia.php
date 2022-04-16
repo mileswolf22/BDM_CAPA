@@ -42,12 +42,12 @@
                 <div class="grupo">
                     <h4>Descripción Breve</h4>
                     <br>
-                    <textarea class="detalle-textarea" name="Descripcion" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" id= "Descripcion" name="Descripcion" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                     <h4>Texto</h4>
                     <br>
-                    <textarea class="detalle-textarea" name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" id name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                    <div id="inputFileImg">
