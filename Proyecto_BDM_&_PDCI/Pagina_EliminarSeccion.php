@@ -1,4 +1,8 @@
+<?php
 
+$mysqli = new mysqli('localhost', 'root', 'root', 'notidb');
+
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -22,15 +26,24 @@
 <body>
 <div class="loader"></div>
 
-<form action="Pagina_DashboardAdmin.html" method="GET" id="form">
+<form action="C_EliminarSeccion.php" method="Post" id="form">
 <div class="form">
                 <h1>Eliminar Sección</h1>
                 <br>
 
                 <div class="grupo">
                 <h4>Selecciona la sección</h4>
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas" value = "0"> 
+                        <option selected>...
+
+                        <?php
+                                    $query = $mysqli -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
                     </select>
                     <br><br>
                 </div>

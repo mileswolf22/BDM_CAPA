@@ -32,9 +32,11 @@ BEGIN
     pFecha_nacimiento
     );
     
-    UPDATE Usuario SET Comun = 1;
-	UPDATE Usuario SET existe = 1;
-	UPDATE Usuario SET Anonimo = 0;
+    UPDATE Usuario SET Reportero 	= 0 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Editor 		= 0 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Comun 		= 1 WHERE Nombre_usuario = pUsuario;
+    UPDATE Usuario SET existe 		= 1 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Anonimo 		= 0 WHERE Nombre_usuario = pUsuario;
 END$$
 
 
@@ -70,9 +72,12 @@ INSERT INTO Usuario
     pFecha_nacimiento
     );
     
-    UPDATE Usuario SET Reportero = 1 WHERE Nombre_usuario = pUsuario;
-    UPDATE Usuario SET existe = 1 WHERE Nombre_usuario = pUsuario;
-	UPDATE Usuario SET Anonimo = 0 WHERE Nombre_usuario = pUsuario;/*indica que el usuario agregado es de tipo Reportero*/
+    UPDATE Usuario SET Reportero 	= 1 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Editor 		= 0 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Comun 		= 0 WHERE Nombre_usuario = pUsuario;
+    UPDATE Usuario SET existe 		= 1 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Anonimo 		= 0 WHERE Nombre_usuario = pUsuario;/*indica que el usuario agregado es de tipo Reportero*/
+    
 END$$
 
 USE NotiDB;
@@ -108,9 +113,11 @@ INSERT INTO Usuario
     pFecha_nacimiento
     );
     
-    UPDATE Usuario SET Editor = 1 WHERE Nombre_usuario = pUsuario;
-    UPDATE Usuario SET existe = 1 WHERE Nombre_usuario = pUsuario;
-	UPDATE Usuario SET Anonimo = 0 WHERE Nombre_usuario = pUsuario; /*indica que el usuario agregado es de tipo Reportero*/
+    UPDATE Usuario SET Reportero 	= 0 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Editor 		= 1 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Comun 		= 0 WHERE Nombre_usuario = pUsuario;
+    UPDATE Usuario SET existe 		= 1 WHERE Nombre_usuario = pUsuario;
+	UPDATE Usuario SET Anonimo 		= 0 WHERE Nombre_usuario = pUsuario; /*indica que el usuario agregado es de tipo Reportero*/
     
 END$$
 
@@ -246,97 +253,123 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE Agregar_Noticia(
 IN pAutor varchar (50),
-IN pFecha_publicacion varchar(20),
-IN pFecha_suceso varchar(20),
 IN pLugar_suceso varchar(100),
+IN pFecha_suceso varchar(30),
 IN pTitulo varchar(100),
 IN pDescripcion TEXT,
-IN pTexto MEDIUMTEXT
+IN pTexto MEDIUMTEXT,
+IN pImagen LONGBLOB,
+IN pDireccionImagen TEXT,
+IN pVideo TEXT,
+IN pDireccionVideo TEXT,
+IN pEtiqueta VARCHAR(20),
+IN pSeccionP VARCHAR(20),
+IN pSeccion1 VARCHAR(20),
+IN pSeccion2 VARCHAR(20)
 )
 BEGIN
 
 INSERT INTO Noticia(
 Autor,
-Fecha_publicacion,
-Fecha_suceso,
 Lugar_suceso,
+Fecha_suceso,
 Titulo,
 Descripcion,
-Texto
+Texto,
+imagen,
+direccion_imagen,
+video,
+direccion_video,
+Etiqueta,
+Seccion_principal,
+Seccion_secundaria,
+Seccion_secundaria2
 )
 VALUES(
 pAutor,
-pFecha_publicacion,
-pFecha_suceso,
 pLugar_suceso,
+pFecha_suceso,
 pTitulo,
 pDescripcion,
-pTexto
-);
-
-END $$
-
-DELIMITER $$
-CREATE PROCEDURE AgregarImagen_Noticia(
-IN pImagen BLOB,
-IN pCodigo_noticia INT
-)
-BEGIN
-
-INSERT INTO Imagen
-(
-imagen,
-noticia_id
-)
-VALUES(
+pTexto,
 pImagen,
-pCodigo_noticia
-);
-SELECT *FROM Imagen
-INNER JOIN Noticia ON Noticia.key_noticia = Imagen.noticia_id;
-
-
-END$$
-
-DELIMITER $$
-CREATE PROCEDURE AgregarVideo_Noticia(
-IN pVideo TINYTEXT,
-IN pCodigo_noticia INT
-)
-BEGIN
-
-INSERT INTO Imagen
-(
-video,
-noticia_id
-)
-VALUES(
+pDireccionImagen,
 pVideo,
-pCodigo_noticia
+pDireccionVideo,
+pEtiqueta,
+Seccion_principal,
+pSeccion1,
+pSeccion2
 );
-SELECT *FROM Video
-INNER JOIN Noticia ON Noticia.key_noticia = Video.noticia_id;
-
-
-END$$
-
-
-DELIMITER $$
-CREATE PROCEDURE Verificar_usuario(
-IN pUsuario varchar(50)
-)
-BEGIN
-
-SELECT
-    
-	existe
-
-	FROM Usuario 
-	WHERE Nombre_usuario = pUsuario;
-    
-
-
+ INSERT INTO Noticia (Fecha_publicacion) VALUES (NOW());
 END $$
 
+DELIMITER $$
+CREATE PROCEDURE Agregar_Seccion(
+IN pSeccion VARCHAR(30),
+IN pColor VARCHAR(30),
+IN pIcono VARCHAR(120)
+)
+BEGIN
+
+INSERT INTO Seccion(
+nombre_seccion,
+color_seccion,
+icono_seccion
+)VALUES(
+pSeccion,
+pColor,
+pIcono
+);
+END$$
+
+use notidb;
 
 
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Secciones()
+BEGIN
+Select * FROM Seccion;
+END$$
+
+
+DELIMITER $$
+CREATE PROCEDURE Eliminar_Seccion(
+IN pNombre VARCHAR(30)
+)
+BEGIN
+DELETE FROM Seccion WHERE key_seccion = pNombre;
+END$$
+
+/*DELIMITER $$
+CREATE PROCEDURE Agregar_imagen(
+IN pId INT,
+IN pImagen BLOB
+)
+BEGIN
+INSERT INTO Imagen_noticia(
+id_noticia,
+imagen,
+)VALUES(
+pId,
+pImagen,
+);
+END
+
+DELIMITER $$
+CREATE PROCEDURE Agregar_video(
+IN pId INT,
+IN pVideo TEXT,
+IN pDireccion TEXT
+)
+BEGIN
+INSERT INTO Imagen_noticia(
+id_noticia,
+video,
+direccion_video
+)VALUES(
+pId,
+pVideo,
+pDireccion
+);
+END*/

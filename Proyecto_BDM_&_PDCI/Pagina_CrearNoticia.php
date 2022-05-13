@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$mysqli = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli2 = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
+
+?>
 
 <!DOCTYPE html>
 
@@ -23,8 +31,9 @@
 <body class="bodyCrearNoticia">
 <div class="loader"></div>
 
-<form action="Pagina_ResultadoBuscar.html" method="GET" id="form" enctype='multipart/form-data'>
+<form action="C_InsertarNoticia.php" method="Post" id="form" enctype='multipart/form-data'>
 <div class="form">
+<input type = "text" id="nombre_usuario" name = "nombre_usuario" value = <?php echo $_SESSION["US"];?> >
                 <h1>Agregar Noticia</h1>
                 <br>
                 <div class="grupo">
@@ -47,12 +56,33 @@
                 <div class="grupo">
                     <h4>Texto</h4>
                     <br>
-                    <textarea class="detalle-textarea" id name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" id = "Texto" name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                    <div id="inputFileImg">
-                     <input type="file[]" id="imagenPrevisualizacion" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
+                     <input type="file" id="imagenPrevisualizacion" name = "imagenPrevisualizacion[]" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
                      <label class="foto-form" id="foto-form" for="imagenPrevisualizacion">Imagenes</label>
+<!--
+                     <script type="text/javascript">
+                        $(document).ready(function(){
+                        $("#submitForm").on("submit", function(e){
+                        e.preventDefault();
+                        $.ajax({
+                        url :"upload.php",
+                        type :"POST",
+                        cache:false,
+                        contentType : false, // you can also use multipart/form-data replace of false
+                        processData : false,
+                        data: new FormData(this),
+                        success:function(response){
+                        $("#success").show();
+                        $("#multipleFile").val("");
+                        fetchData();
+                        }
+                        });
+                        });
+                    </script>
+                    -->
                    </div>
 
                    <input type="hidden" name="TotalImg" id="TotalImg" value="0">
@@ -84,7 +114,7 @@
                 <div class="grupo">
 
                  <div id="inputFileVideo">
-                     <input type="file[]" id="videoPrevisualizacion" accept="video/mp4" onchange="VideoPrevChange(this);" required multiple />
+                     <input type="file" id="videoPrevisualizacion" name = "videoPrevisualizacion[]" accept="video/mp4" onchange="VideoPrevChange(this);" required multiple />
                      <label class="foto-form" id="video-form" for="videoPrevisualizacion">Videos</label>
                  </div>
 
@@ -126,21 +156,51 @@
                 </div>
                 <div class="grupo">
                     <select class="categorias-select" name="EtiquetaPrincipal" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                        <option selected value = "0"> 
+                            ...
+                                    <?php
+                                    $query = $mysqli -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
+                                    
                     </select>
                     <br><br>
                 </div> 
                 <div class="grupo">
                 <h4>Sección Principal</h4>
                     <select class="categorias-select" name="EtiquetaSecundaria1" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                        <option selected>
+
+                        ...
+                                    <?php
+                                    $query = $mysqli2 -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
                     </select>
                     <br><br>
                 </div>
                 <div class="grupo">
                 <h4>Secciones Secundarias</h4>
                     <select class="categorias-select" name="EtiquetaSecundaria2" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                        <option selected>
+
+                        ...
+                                    <?php
+                                    $query = $mysqli3 -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
                     </select>
                     <br><br>
                 </div>

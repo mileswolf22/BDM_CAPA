@@ -21,12 +21,12 @@
 <body class="bodyCrearSeccion">
 <div class="loader"></div>
 
-<form action="Pagina_DashboardAdmin.php" method="GET" id="form">
+<form action="C_InsertarSeccion.php" method="Post" id="form">
 <div class="form">
                 <h1>Agregar Sección</h1>
                 <br>
                 <div class="grupo">
-                    <input type="text" name="" id="NombreSeccion" required><span class="barra"></span>
+                    <input type="text" name="NombreSeccion" id="NombreSeccion" required><span class="barra"></span>
                     <label class="datos-form" for="">Nombre de la Sección</label>
                 </div>
                 <div class="grupo">
@@ -36,8 +36,9 @@
                 <div class="grupo">
                     <h5>Icono de la Sección</h5>
                     <input type="hidden" name="Icon" id="Icon" value="recursos/imagenes/iconos/cake-solid-24.png" required >
-
+            
                     <button type="button" class="iconsSeccionSolo" id="iconsSeccionSolo"> <img id="imgIconSeccion"src="recursos/imagenes/iconos/cake-solid-24.png"/></button>
+                   
                       <div id="groupIcons">
                            <button type="button" class="iconsSeccion" id="iconsSeccion_0" onclick="IconsButton(this);"> <img src="recursos/imagenes/iconos/cake-solid-24.png"/></button>
                            <button type="button" class="iconsSeccion" id="iconsSeccion_1" onclick="IconsButton(this);"> <img src="recursos/imagenes/iconos/baguette-solid-24.png"/></button>
