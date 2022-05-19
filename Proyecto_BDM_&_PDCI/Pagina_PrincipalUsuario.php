@@ -1,6 +1,7 @@
 
 <?php
       session_start();
+      $_SESSION['TITULO_NOTICIA'] = '';
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +31,7 @@
      
      switch ( $RolUsuario ) {
        case 'Editor':
+        
         include ('./headerAdministrador.php');
          break;
        case 'Reportero':

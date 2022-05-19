@@ -5,6 +5,13 @@ $mysqli = new mysqli('localhost', 'root', 'root', 'notidb');
 $mysqli2 = new mysqli('localhost', 'root', 'root', 'notidb');
 $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
 
+
+$rand = range(1, 10000);
+shuffle($rand);
+foreach ($rand as $val) {
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +41,7 @@ $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
 <form action="C_InsertarNoticia.php" method="Post" id="form" enctype='multipart/form-data'>
 <div class="form">
 <input type = "text" id="nombre_usuario" name = "nombre_usuario" value = <?php echo $_SESSION["US"];?> >
+<input type= "text" name="numero" id="numero" value = <?php echo $val;?>>
                 <h1>Agregar Noticia</h1>
                 <br>
                 <div class="grupo">
@@ -58,6 +66,9 @@ $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
                     <br>
                     <textarea class="detalle-textarea" id = "Texto" name="Texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
+
+                
+               
                 <div class="grupo">
                    <div id="inputFileImg">
                      <input type="file" id="imagenPrevisualizacion" name = "imagenPrevisualizacion[]" accept="image/*" onchange="ImgPrevChange(this);" required multiple />
@@ -155,7 +166,7 @@ $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
                     <button type="button" onclick="EliminarEtiquetaBusquedaFuncion();" id="EliminarEtiqueta">Eliminar Etiqueta</button> 
                 </div>
                 <div class="grupo">
-                    <select class="categorias-select" name="EtiquetaPrincipal" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="Etiqueta" id="menuEtiquetas"> 
                         <option selected value = "0"> 
                             ...
                                     <?php
@@ -172,7 +183,7 @@ $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
                 </div> 
                 <div class="grupo">
                 <h4>Sección Principal</h4>
-                    <select class="categorias-select" name="EtiquetaSecundaria1" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="EtiquetaPrincipal" id="menuEtiquetas"> 
                         <option selected>
 
                         ...
@@ -189,7 +200,7 @@ $mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
                 </div>
                 <div class="grupo">
                 <h4>Secciones Secundarias</h4>
-                    <select class="categorias-select" name="EtiquetaSecundaria2" id="menuEtiquetas"> 
+                    <select class="categorias-select" name="EtiquetaSecundaria" id="menuEtiquetas"> 
                         <option selected>
 
                         ...

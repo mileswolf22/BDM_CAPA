@@ -1,5 +1,40 @@
 <?php
 session_start();
+$con=mysqli_connect('localhost','root','root','notidb');
+
+$server = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "notidb";
+
+
+	$conn = new PDO(
+		"mysql:host=$server;dbname=$dbname","$username","$password");
+	
+	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+$temp = $_SESSION['TituloProvisionalA'];
+$query_mostrar = "CALL Mostrar_Noticia_Completa('$temp')";
+$result = mysqli_query ($con, $query_mostrar);
+    
+    while($row = mysqli_fetch_row($result))
+    {   
+        $_SESSION['autor']                          = $row[0]; 
+        $_SESSION['fechapublicacion']               = $row[1]; 
+        $_SESSION['fechasuceso']                    = $row[2]; 
+        $_SESSION['lugarsuceso']                    = $row[3]; 
+        $_SESSION['titulaso']                       = $row[4]; 
+        $_SESSION['descripcion']                    = $row[5]; 
+        $_SESSION['texto']                          = $row[6];
+        $_SESSION['etiqueta']                       = $row[7];
+        $_SESSION['seccionprincipal']               = $row[8]; 
+        $_SESSION['seccionsecundaria']              = $row[9]; 
+        $_SESSION['numeroref']                      = $row[10]; 
+        $_SESSION['positivos']                      = $row[11]; 
+        $_SESSION['id']                             = $row[12]; 
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,24 +84,26 @@ session_start();
             <div class="Datos-Noticia">
                  
                 <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> Creado:</h5>
-                <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> 19/02/2022</h5>
+                <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> <?php echo$_SESSION['fechapublicacion']?></h5>
                 <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> | </h5>
                 <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> Publicado:</h5> 
-                <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> 19/02/2022</h5>
+                <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> <?php echo$_SESSION['fechasuceso']?></h5>
                 <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> | </h5>
                 <h5 class="DatosNoticia-Datos" id="FechaHoraP1"> Reportero:</h5>
-                <h5 class="DatosNoticia-Datos" id="EditadoP1"> Sary Cazares</h5>
+                <h5 class="DatosNoticia-Datos" id="EditadoP1"> <?php echo$_SESSION['autor']?></h5>
                 <br>
             </div>
                 
-                <h1> ¡Por fin sale la pelicula de Sherk 5 en este 2022! </h1>              
+                <h1> <?php echo$_SESSION['titulaso']?></h1>              
                 <br>
-                <h5>Es extraño pero por fin despues de tanto tiempo de espera ya sale Sherk 5. Esperenla pronto en cines.</h5>
+                <h5><?php echo$_SESSION['descripcion']?></h5>
 
+                <input type="hidden" name="num" id="num" value = <?php echo$_SESSION['numeroref']?>>
+                
                 <div class="LugarFechaNoticia">
-                    <h3 class="LugarFechaNoticia-Datos"> México </h3>
+                    <h3 class="LugarFechaNoticia-Datos"><?php echo$_SESSION['lugarsuceso']?></h3>
                     <h3 class="LugarFechaNoticia-Datos"> | </h3>
-                    <h3 class="LugarFechaNoticia-Datos"> 19/01/2022 </h3>
+                    <h3 class="LugarFechaNoticia-Datos"><?php echo$_SESSION['fechasuceso']?></h3>
                 </div>  
                 <br>                 
             </div> 
@@ -74,18 +111,29 @@ session_start();
             <div class="text-noticia">                     
             <br><br>
             </div>        
-                
-            <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="recursos/imagenes/diseño1.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="recursos/imagenes/diseño2.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="recursos/imagenes/diseño3.jpeg" class="d-block w-100" alt="...">
-                    </div>
+                  <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
+                  <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <?php
+                    $contador = 0;
+                    $temp = $_SESSION['numeroref'];
+                    $stmt = $conn->prepare("CALL Imagen_NotaCompleta('$temp')");
+                    $stmt->execute();
+                    $lista_imagenes = $stmt->fetchAll(); 
+                    foreach($lista_imagenes as $imagen) {
+                        $contador++;
+                    ?>
+              
+              
+                   <!-- <img src=  class="d-block user-select-none" width="100%" height="200"/> -->
+                    <img class="img-thumbnail" src="./recursos/imagenes/<?=$imagen['imagen']?> " width='300' height='200'"> 
+                 
+        
+                    <?php
+                    }
+                    ?> 
+                  </div>
+                 
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,14 +151,7 @@ session_start();
                     <div class="noticia-fondo">                         
                         <br>
                         <br>  
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dignissim magnis,
-                             tincidunt gravida mattis felis eu in quam senectus, scelerisque vivamus
-                              netus leo sapien maecenas viverra volutpat. Duis urna habitant pulvinar
-                               suspendisse mi nisl neque fusce, fermentum magnis nascetur litora diam
-                                natoque dui habitasse, curabitur feugiat vulputate torquent nullam nam
-                                 posuere. Conubia fermentum orci at penatibus fringilla dictumst venenatis
-                                 , vel hendrerit aliquet habitant primis lobortis, vitae fames arcu tortor
-                                  porta ultrices.</p>
+                        <p><?php echo$_SESSION['texto']?></p>
                                   <br><br>
 
                                   <h4>Palabras Clave</h4>
@@ -154,35 +195,44 @@ session_start();
                           <span class="visually-hidden">Next</span>
                       </button>
                   </div>
-      
-      
-                  <div class="text-noticia">  
+
+                 
+                       
+                <?php  
+     
+     $RolUsuario = $_SESSION['RolHeader'];
+     
+     switch ( $RolUsuario ) {
+       case 'Editor':
+        
+        include ('./ComentarioAdmin.php');
+         break;
+         
+         case 'Reportero':
+            ?>
+          <a href="Pagina_ModificarNoticia.php" class="buttonNoticiaEsh">Modificar Noticia</a> 
+          <?php
+           break;
+           
+         
+            ?>
+             
+    <?php
+      }
+    
+     ?>
+                  
                   <br><br>
-                  <div class="imagenLike">                   
-                  <img id="LikeP_1" class="imagen-iconoLike offoff"onclick="funcioniconLike(this)" src="recursos/imagenes/iconos/star-regular-48.png">
+            <div class="text-noticia">
+                <br><br>
+                <div class="imagenLike"> 
+                                
+                 <img id="LikeP_1" class="imagen-iconoLike offoff"onclick="funcioniconLike(this)" src="recursos/imagenes/iconos/star-regular-48.png">
                   <h3> 0 </h3>
                   <h3> ★</h3>
                   <br><br><br>
                 </div> 
-
-                <br><br>
-
-                <div class="comentariosRespuestas">
-
-                <form class="comentariosRespuestasform">
-                          <div class="grupo">
-                          <label class="datos-form">Comentario Administrador</label>
-                          <textarea id="comment" class="form-control" required ></textarea></label>
-                          </div>
-
-                          <br><br>
-                        <button type="button" class="buttonComentario" >Enviar</button>
-                        <a href="Pagina_ModificarNoticia.php" class="buttonNoticiaEsh">Modificar Noticia</a>
-                        <a href="#" class="buttonNoticiaEsh">Eliminar Noticia</a>
-                      </form>
-
-                </div> 
-                
+           </div>
                   <br><br>
                 </div> 
 
@@ -199,15 +249,11 @@ session_start();
 
     <section class="contenedor">
 
-    <div class="contenedor-comentariosRespuesta">
-                <div class="respuestas-resultado">
-                          </div>
-                          <div id="result">
-               
-               
-               
-               
-                      </div>
+    <?php
+
+    include ('./CuadroComentarios.php');
+
+    ?>
 
     
 
@@ -218,7 +264,7 @@ session_start();
                           <input class="IdEscondido" type="text" name="" id="IdEscondido">
                           </div>
 
-                          <div class="grupo">
+                         
                           <label class="datos-form">Comentario</label>
                           <textarea id="comment" class="form-control" required ></textarea></label>
                           </div>

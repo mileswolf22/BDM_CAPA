@@ -258,14 +258,10 @@ IN pFecha_suceso varchar(30),
 IN pTitulo varchar(100),
 IN pDescripcion TEXT,
 IN pTexto MEDIUMTEXT,
-IN pImagen LONGBLOB,
-IN pDireccionImagen TEXT,
-IN pVideo TEXT,
-IN pDireccionVideo TEXT,
 IN pEtiqueta VARCHAR(20),
 IN pSeccionP VARCHAR(20),
 IN pSeccion1 VARCHAR(20),
-IN pSeccion2 VARCHAR(20)
+IN pNumero VARCHAR(20)
 )
 BEGIN
 
@@ -276,14 +272,10 @@ Fecha_suceso,
 Titulo,
 Descripcion,
 Texto,
-imagen,
-direccion_imagen,
-video,
-direccion_video,
 Etiqueta,
 Seccion_principal,
 Seccion_secundaria,
-Seccion_secundaria2
+numero_referencia
 )
 VALUES(
 pAutor,
@@ -292,16 +284,324 @@ pFecha_suceso,
 pTitulo,
 pDescripcion,
 pTexto,
+pEtiqueta,
+pSeccionP,
+pSeccion1,
+pNumero
+);
+UPDATE Noticia SET Fecha_publicacion = NOW();
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Agregar_Imagen(
+IN pImagen LONGBLOB,
+IN pDireccionImagen TEXT,
+IN pNumero VARCHAR(20),
+IN pContador INT
+)
+BEGIN
+INSERT INTO Imagen_noticia(
+imagen,
+direccion_imagen,
+numero_referencia,
+contador
+)VALUES(
 pImagen,
 pDireccionImagen,
+pNumero,
+pContador
+);
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE Agregar_Video(
+IN pVideo TEXT,
+IN pDireccionVideo TEXT,
+IN pNumero VARCHAR(20)
+)
+BEGIN
+INSERT INTO Video_noticia(
+video,
+direccion_video,
+numero_referencia
+)VALUES(
 pVideo,
 pDireccionVideo,
-pEtiqueta,
-Seccion_principal,
-pSeccion1,
-pSeccion2
+pNumero
 );
- INSERT INTO Noticia (Fecha_publicacion) VALUES (NOW());
+END $$
+
+use notidb;
+DROP PROCEDURE Mostrar_Noticia_Completa;
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_Completa(
+IN pTitulo VARCHAR(100)
+)
+BEGIN
+SELECT 
+Autor, Fecha_publicacion, Fecha_suceso, Lugar_suceso, Titulo, Descripcion, Texto, Etiqueta, Seccion_principal, Seccion_secundaria, numero_referencia,Positivos, key_noticia
+FROM Noticia 
+WHERE Titulo = pTitulo;
+
+END $$
+
+/* Los siguientes porcedure llevan una inicial en su nombre
+A = Aprobada
+R = Revision
+D = Devuelta
+P = Pendiente
+NA = No Aprobada
+*/
+
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_Portada_A(
+)
+BEGIN
+Select
+numero_referencia, 
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Aprobada = 1;
+
+END $$
+
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_R(
+)
+BEGIN
+Select
+numero_referencia, 
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Revision = 1;
+
+END $$
+
+DROP PROCEDURE Mostrar_Noticia_D;
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_D(
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Devuelta = 1;
+
+END $$
+
+DROP PROCEDURE Mostrar_Noticia_P;
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_P(
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Pendiente = 1;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_NA(
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE No_Aprobada = 1;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Modificar_Noticia(
+)
+BEGIN
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Eliminar_Noticia(
+)
+BEGIN
+
+END $$
+
+DROP PROCEDURE Aprobar_Noticia;
+DELIMITER $$
+CREATE PROCEDURE Aprobar_Noticia(
+IN pComentario TINYTEXT,
+IN pID INT
+)
+BEGIN
+UPDATE Noticia SET comentario_admin = pComentario WHERE key_noticia = pID;
+
+UPDATE Noticia SET Aprobada 	= 1 WHERE key_noticia = pID;
+UPDATE Noticia SET No_Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Pendiente 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Revision 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Devuelta 	= 0 WHERE key_noticia = pID;
+END $$
+
+DROP PROCEDURE Denegar_Noticia;
+DELIMITER $$
+CREATE PROCEDURE Denegar_Noticia(
+IN pComentario TINYTEXT,
+IN pID INT
+)
+BEGIN
+UPDATE Noticia SET comentario_admin = pComentario WHERE key_noticia = pID;
+
+UPDATE Noticia SET Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET No_Aprobada 	= 1 WHERE key_noticia = pID;
+UPDATE Noticia SET Pendiente 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Revision 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Devuelta 	= 0 WHERE key_noticia = pID;
+END $$
+
+DROP PROCEDURE Revisar_Noticia;
+DELIMITER $$
+CREATE PROCEDURE Revisar_Noticia(
+IN pComentario TINYTEXT,
+IN pID INT
+)
+BEGIN 
+UPDATE Noticia SET comentario_admin = pComentario WHERE key_noticia = pID;
+
+UPDATE Noticia SET Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET No_Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Pendiente 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Revision 	= 1 WHERE key_noticia = pID;
+UPDATE Noticia SET Devuelta 	= 0 WHERE key_noticia = pID;
+END $$
+
+DROP PROCEDURE Devolver_Noticia;
+DELIMITER $$
+CREATE PROCEDURE Devolver_Noticia(
+IN pComentario TINYTEXT,
+IN pID INT
+)
+BEGIN 
+UPDATE Noticia SET comentario_admin = pComentario WHERE key_noticia = pID;
+
+UPDATE Noticia SET Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET No_Aprobada 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Pendiente 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Revision 	= 0 WHERE key_noticia = pID;
+UPDATE Noticia SET Devuelta 	= 1 WHERE key_noticia = pID;
+END $$
+
+
+DELIMITER $$
+CREATE PROCEDURE Agregar_Comentario(
+IN pNoticia_id INT,
+IN pUsuario varchar(50),
+IN pFoto BLOB,
+IN pTexto TEXT
+)
+BEGIN
+INSERT INTO Comentario(
+noticia_id,
+Usuario_com,
+Foto_com,
+Fecha_hora,
+Texto_comentario
+)VALUES(
+pNoticia_id,
+pUsuario,
+pFoto,
+NOW(),
+pTexto
+);
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Modificar_Comentario(
+IN pID INT,
+IN pNoticia INT,
+IN pUsuario varchar(50),
+IN pFoto BLOB,
+IN pFecha DATETIME,
+IN pTexto TEXT
+)
+BEGIN
+UPDATE Comentario
+SET
+
+noticia_id 			= pNoticia,
+Usuario_com    		= pUsuario,
+Foto_com			= pFoto, 
+Fecha_hora			= NOW(), 
+Texto_comentario 	= pTexto
+
+WHERE key_comentario = pID;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Eliminar_Comentario(
+IN pID INT
+)
+BEGIN
+DELETE FROM Comentario WHERE key_comemntario = pID;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Comentario_Usuario(
+IN pID INT,
+IN pUsuario varchar(50)
+)
+BEGIN
+
+SELECT 
+key_comentario,
+Usuario_com,
+Foto_com,
+Fecha_hora,
+Texto_comentario 
+FROM Comentario 
+WHERE key_comentario = pID AND Usuario_com = pUsuario;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Comentarios(
+IN pID INT
+)
+BEGIN
+
+SELECT 
+key_comentario,
+Usuario_com,
+Foto_com,
+Fecha_hora,
+Texto_comentario 
+WHERE noticia_id = pID; 
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Agregar_Like(
+IN pID INT
+)
+BEGIN
+UPDATE Comentario SET Positivos = Positivos +1 WHERE key_noticia = pID;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Cantidad_Like(
+
+)
+BEGIN
+SELECT Positivos FROM Noticia WHERE key_noticia = pID;
 END $$
 
 DELIMITER $$
@@ -330,15 +630,6 @@ DELIMITER $$
 CREATE PROCEDURE Mostrar_Secciones()
 BEGIN
 Select * FROM Seccion;
-END$$
-
-
-DELIMITER $$
-CREATE PROCEDURE Eliminar_Seccion(
-IN pNombre VARCHAR(30)
-)
-BEGIN
-DELETE FROM Seccion WHERE key_seccion = pNombre;
 END$$
 
 /*DELIMITER $$
@@ -373,3 +664,146 @@ pVideo,
 pDireccion
 );
 END*/
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_A_Usuario(
+IN pUsuario VARCHAR(50)
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Aprobada = 1
+AND Autor = pUsuario;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_R_Usuario(
+IN pUsuario VARCHAR(50)
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Revision = 1
+AND Autor = pUsuario;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_D_Usuario(
+IN pUsuario VARCHAR(50)
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Devuelta = 1
+AND Autor = pUsuario;
+
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_P_Usuario(
+IN pUsuario VARCHAR(50)
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE Pendiente = 1
+AND Autor = pUsuario;
+
+END $$
+
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Noticia_NA_Usuario(
+IN pUsuario VARCHAR(50)
+)
+BEGIN
+Select 
+numero_referencia,
+Seccion_principal,
+Titulo,
+Descripcion
+FROM Noticia WHERE No_Aprobada = 1
+AND Autor = pUsuario;
+
+END $$
+
+drop procedure Cargar_Imagen;
+DELIMITER $$
+CREATE PROCEDURE Cargar_Imagen(
+IN pID varchar(20)
+)
+BEGIN
+Select imagen FROM Imagen_Noticia WHERE numero_referencia = pID AND contador = 1;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Cargar_Video(
+IN pID varchar(20)
+)
+BEGIN
+Select video FROM Video_noticia WHERE numero_referencia = pID;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Imagen_NotaCompleta(
+IN pID varchar(20)
+)
+BEGIN
+Select imagen FROM Imagen_Noticia WHERE numero_referencia = pID;
+END $$
+
+drop procedure Cargar_SeccionNoticia;
+DELIMITER $$
+CREATE PROCEDURE Cargar_SeccionNoticia(
+IN pSeccion varchar(20)
+)
+BEGIN
+Select color_seccion, icono_seccion FROM Seccion WHERE key_seccion = pSeccion;
+END$$
+
+USE notidb;
+DROP PROCEDURE Modificar_Seccion;
+DELIMITER $$
+CREATE PROCEDURE Modificar_Seccion(
+IN pSeccion VARCHAR(30)
+)
+BEGIN
+UPDATE Seccion SET 
+color_seccion = pColor, 
+icono_seccion = pIcono 
+WHERE pSeccion = nombre_seccion;
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE Eliminar_Seccion(
+IN pID INT
+)
+BEGIN
+DELETE FROM Seccion WHERE key_seccion = pID;
+END $$
+
+drop procedure Verificar_Aprobado
+DELIMITER $$
+CREATE PROCEDURE Verificar_Aprobado(
+)
+BEGIN
+
+SELECT Aprobada FROM Noticia;
+IF Aprobada = 1 THEN 
+UPDATE Noticia SET ExisteAprobada = '1' WHERE Aprobada = 1;
+END IF;
+END$$ 

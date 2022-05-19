@@ -1,5 +1,5 @@
 
-var contador = 3;
+var contador = 1;
 var i;
 
 function ComentariosYaPuestos(){

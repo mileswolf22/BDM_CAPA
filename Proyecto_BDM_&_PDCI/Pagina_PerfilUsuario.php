@@ -13,10 +13,11 @@ $result = mysqli_query ($con, $query_mostrar);
         base64_encode($_SESSION['foto']               = $row[2]);
         $_SESSION['correo']             = $row[3];
         $_SESSION['num_contact']        = $row[4];
-        $_SESSION['fecha']             = $row[5];
+        $_SESSION['fecha']              = $row[5];
 
     }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">

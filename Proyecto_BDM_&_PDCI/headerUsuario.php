@@ -66,7 +66,60 @@ $result = mysqli_query ($con, $query_mostrar);
                     <p>¿De verdad quieres cerrar sesión? :c</p>
                 </div>
                 <div class="modal_botones">
-                    <a href="index.php" class="boton">ACEPTAR</a>
+                    <a type = "submit" name = "btnAceptar" href="index.php" class="boton">ACEPTAR</a>
+                    <?php
+                    /*
+                        if (isset(_POST['btnAceptar'])) {
+                         //Vaciamos y destruimos las variables de sesión
+                
+                    $_SESSION['autor']                         = NULL;                         
+                    $_SESSION['fechapublicacion']              = NULL;   
+                    $_SESSION['fechasuceso']                   = NULL;         
+                    $_SESSION['lugarsuceso']                   = NULL;       
+                    $_SESSION['titulaso']                      = NULL;  
+                    $_SESSION['descripcion']                   = NULL;
+                    $_SESSION['texto']                         = NULL;
+                    $_SESSION['etiqueta']                      = NULL;
+                    $_SESSION['seccionprincipal']              = NULL;
+                    $_SESSION['seccionsecundaria']             = NULL;
+                    $_SESSION['numeroref']                     = NULL;
+                    $_SESSION['titulo']                        = NULL;
+                    $_SESSION['rol']                           = NULL;    
+                    $_SESSION['US']                            = NULL;
+                    $_SESSION['CON']                           = NULL;
+                    $_SESSION['nom_us']                        = NULL;     
+                    $_SESSION['nom_com']                       = NULL;         
+                    $_SESSION['foto']                          = NULL;  
+                    $_SESSION['correo']                        = NULL;
+                    $_SESSION['num_contact']                   = NULL;
+                    $_SESSION['$fecha']                        = NULL;
+                    
+                    unset($_SESSION['autor']);
+                    unset($_SESSION['fechapublicacion']);
+                    unset($_SESSION['fechasuceso']);
+                    unset($_SESSION['lugarsuceso']);
+                    unset($_SESSION['titulaso']);
+                    unset($_SESSION['descripcion']);
+                    unset($_SESSION['texto']);
+                    unset($_SESSION['etiqueta']);
+                    unset($_SESSION['seccionprincipal']);
+                    unset($_SESSION['seccionsecundaria']);
+                    unset($_SESSION['numeroref']);
+                    unset($_SESSION['titulo']);
+                    unset($_SESSION['rol']);
+                    unset($_SESSION['US']);
+                    unset($_SESSION['CON']);
+                    unset($_SESSION['nom_us']);
+                    unset($_SESSION['nom_com']);
+                    unset($_SESSION['foto']);
+                    unset($_SESSION['correo']);
+                    unset($_SESSION['num_contact']);
+                    unset($_SESSION['$fecha']);
+                    //Redireccionamos a la pagina index.php
+                    header('Location: index.php');
+                                                        }
+                                                        */
+                    ?>
                 </div>
             </div>
         </div> 
