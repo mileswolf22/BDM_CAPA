@@ -362,7 +362,8 @@ Select
 numero_referencia, 
 Seccion_principal,
 Titulo,
-Descripcion
+Descripcion,
+Seccion_principal
 FROM Noticia WHERE Aprobada = 1;
 
 END $$
@@ -665,6 +666,7 @@ pDireccion
 );
 END*/
 
+drop procedure Mostrar_Noticia_A_Usuario;
 DELIMITER $$
 CREATE PROCEDURE Mostrar_Noticia_A_Usuario(
 IN pUsuario VARCHAR(50)
@@ -680,6 +682,7 @@ AND Autor = pUsuario;
 
 END $$
 
+drop procedure Mostrar_Noticia_R_Usuario;
 DELIMITER $$
 CREATE PROCEDURE Mostrar_Noticia_R_Usuario(
 IN pUsuario VARCHAR(50)
@@ -694,6 +697,7 @@ FROM Noticia WHERE Revision = 1
 AND Autor = pUsuario;
 
 END $$
+
 
 DELIMITER $$
 CREATE PROCEDURE Mostrar_Noticia_D_Usuario(
@@ -766,6 +770,15 @@ BEGIN
 Select imagen FROM Imagen_Noticia WHERE numero_referencia = pID;
 END $$
 
+drop procedure Video_NotaCompleta;
+DELIMITER $$
+CREATE PROCEDURE Video_NotaCompleta(
+IN pID varchar(20)
+)
+BEGIN
+Select video FROM Video_Noticia WHERE numero_referencia = pID;
+END $$
+
 drop procedure Cargar_SeccionNoticia;
 DELIMITER $$
 CREATE PROCEDURE Cargar_SeccionNoticia(
@@ -779,7 +792,9 @@ USE notidb;
 DROP PROCEDURE Modificar_Seccion;
 DELIMITER $$
 CREATE PROCEDURE Modificar_Seccion(
-IN pSeccion VARCHAR(30)
+IN pSeccion VARCHAR(30),
+IN pColor VARCHAR(30),
+IN pIcono VARCHAR(120)
 )
 BEGIN
 UPDATE Seccion SET 
@@ -807,3 +822,110 @@ IF Aprobada = 1 THEN
 UPDATE Noticia SET ExisteAprobada = '1' WHERE Aprobada = 1;
 END IF;
 END$$ 
+
+DELIMITER $$
+CREATE PROCEDURE Etiqueta_Noticia(
+)
+BEGIN
+SELECT Etiqueta FROM Noticia;
+END $$
+
+
+DROP PROCEDURE Mostrar_Etiquetas;
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Etiquetas(
+)
+BEGIN
+SELECT key_noticia, Etiqueta FROM Noticia;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE TraerSeccion(
+IN pSeccion VARCHAR(10)
+)
+BEGIN 
+SELECT color_seccion, icono_seccion FROM Seccion WHERE nombre_seccion = pSeccion; 
+
+END$$
+
+
+DELIMITER $$
+CREATE PROCEDURE TraerUsuario(
+)
+BEGIN
+SELECT key_usuario, Nombre_usuario FROM Usuario WHERE Reportero = 1;
+END $$
+
+DROP PROCEDURE Eliminar_Seccion;
+DROP PROCEDURE Eliminar_Usuario;
+
+DELIMITER $$
+CREATE PROCEDURE EliminarUsuario(
+IN pUser VARCHAR(50)
+)
+BEGIN
+DELETE FROM Usuario WHERE Nombre_usuario = pUser;
+DELETE FROM Noticia WHERE Autor = pUser;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE EliminarSeccion(
+IN pSeccion VARCHAR(50)
+)
+BEGIN
+DELETE FROM Seccion WHERE key_seccion = pSeccion;
+DELETE FROM Noticia WHERE Seccion_principal = pSeccion;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE Eliminar_Noticia(
+IN pID varchar(20)
+)
+BEGIN
+DELETE FROM Noticia WHERE key_noticia = pID;
+END $$
+
+DROP PROCEDURE Modificar_Noticia;
+DELIMITER $$
+CREATE PROCEDURE Modificar_Noticia(
+IN pID VARCHAR(20),
+IN pAutor VARCHAR(50),
+IN pLugar VARCHAR (50),
+IN pFecha VARCHAR(50),
+IN pTitulo VARCHAR(100),
+IN pDescripcion TEXT, 
+IN pTexto MEDIUMTEXT,
+IN pEtiqueta VARCHAR(20),
+IN pSeccion VARCHAR(20),
+IN pSeccionS1 VARCHAR(20)
+)
+BEGIN
+UPDATE Noticia 
+SET
+ Autor 					= pAutor,
+ Lugar_suceso 			= pLugar,
+ Fecha_publicacion  	= pFecha,
+ Titulo 				= pTitulo,
+ Descripcion 			= pDescripcion,
+ Texto 					= pTexto,
+ Etiqueta 				= pEtiqueta,
+ Seccion_principal 		= pSeccion,
+ Seccion_secundaria 	= pSeccionS1
+ WHERE key_noticia = pID;
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE MostrarModif(
+IN pNum VARCHAR(20)
+)
+BEGIN
+SELECT Autor, key_noticia FROM Noticia WHERE numero_referencia = pNum;
+END $$
+
+
+DELIMITER $$
+CREATE PROCEDURE TraerPeliculas(
+)
+BEGIN
+SELECT * FROM Noticia WHERE Aprobada = 1;
+END $$

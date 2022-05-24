@@ -400,12 +400,12 @@ $_SESSION['tituloN'] = NULL;
             <h3 class="card-header" id="cardCategoria" style="background-color:yellow"> <img class="iconCard" src="recursos/imagenes/iconos/movie-play-solid-24.png" /> </h3>
             <div class="card-body">
               <h5 class="card-title"><?php echo$_SESSION['tituloP']?></h5>
-              <input type="hidden" name="num" id="num" value = <?php echo$_SESSION['numeroP']?>>
+              <input type="text" name="num" id="num" value = <?php echo$_SESSION['numeroP']?>>
             </div>
             
                 <?php
-                    $temp = $_SESSION['numeroP'];
-                    $stmt = $conn->prepare("CALL Cargar_Imagen('$temp')");
+                    $temp3 = $_SESSION['numeroP'];
+                    $stmt = $conn->prepare("CALL Cargar_Imagen('$temp3')");
                     $stmt->execute();
                     $lista_imagenes = $stmt->fetchAll(); 
                     foreach($lista_imagenes as $imagen) {
@@ -441,3 +441,4 @@ $_SESSION['tituloN'] = NULL;
 
     }
   }
+  ?>

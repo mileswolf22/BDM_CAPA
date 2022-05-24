@@ -2,6 +2,9 @@
 <?php
       session_start();
       $_SESSION['TITULO_NOTICIA'] = '';
+
+      include_once 'C_CuadroNoticia.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -65,136 +68,25 @@
 
         <h2 class="titulo-nosotros">Noticias Recientes</h2>
 
-        <div class="noticiasCard">
-            <div class="NotiCard">
-        <div class="card mb-3">
-            <h3 class="card-header" id="cardCategoria" style="background-color:yellow"> <img class="iconCard" src="recursos/imagenes/iconos/movie-play-solid-24.png" /> </h3>
-            <div class="card-body">
-              <h5 class="card-title">¡Por fin sale la pelicula de Sherk 5 en este 2022!</h5>
-            </div>
-            
-            <img src="recursos/imagenes/Ejemplos/Noticias/shrek5.jpg" class="d-block user-select-none" width="100%" height="200"/>
-            <div class="card-body">
-              <p class="card-text">Es extraño pero por fin despues de tanto tiempo de espera ya sale Sherk 5. Esperenla pronto en cines.</p>
-            </div>
-            <div class="card-body">
-              <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-            </div>
-            <div class="card-footer text-muted">
-              2 days ago
-            </div>
-          </div>
-        </div>
+        <?php
+        $con=mysqli_connect('localhost','root','root','notidb');
+        $extend = new CargaNoticias();
 
-        <div class="NotiCard">
-            <div class="card mb-3">
-                <h3 class="card-header" style="background-color:blue"> <img class="iconCard" src="recursos/imagenes/iconos/football-regular-24.png" /> </h3>
-                <div class="card-body">
-                  <h5 class="card-title">Chucky vuelve a entrenar con la selección</h5>
-                </div>
-                
-                <img src="recursos/imagenes/Ejemplos/Noticias/noticia_1.jpg" class="d-block user-select-none" width="100%" height="200"/>
-                <div class="card-body">
-                  <p class="card-text">No, no nos referimos al personaje de aquellas películas, sino a HIving Lozano, quien habría recibido antes una lesión que podría quedar en el pasado.</p>
-                </div>
-                <div class="card-body">
-                  <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
-              </div>
-            </div>
+        $query_mostrar = "CALL TraerPeliculas()";
+        $result = mysqli_query ($con, $query_mostrar);
+        $contador = 0;
+            while($row = mysqli_fetch_row($result))
+            {   
+           $extend-> Noticia_Aprobada();
+           ?>
+<br><br>
+           <?php
+            }
 
-            <div class="NotiCard">
-                <div class="card mb-3">
-                    <h3 class="card-header" style="background-color:purple"> <img class="iconCard" src="recursos/imagenes/iconos/buildings-regular-24.png" /> </h3>
-                    <div class="card-body">
-                      <h5 class="card-title">Castores arquitectos dirigen proyecto de edificación</h5>
-                    </div>
-                    
-                    <img src="recursos/imagenes/Ejemplos/Noticias/noticia_2.jpg" class="d-block user-select-none" width="100%" height="200"/>
-                    <div class="card-body">
-                      <p class="card-text">La Federación de Castores Fundadora Mundial (o por sus siglas FCFM) ha presentado una propuesta para la elaboración de casas para los mas necesitados</p>
-                    </div>
-                    <div class="card-body">
-                      <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                      2 days ago
-                    </div>
-                  </div>
-                </div>
-
-                <div class="NotiCard">
-                    <div class="card mb-3">
-                        <h3 class="card-header" style="background-color:green"> <img class="iconCard" src="recursos/imagenes/iconos/invader-solid-24.png" /> </h3>
-                        <div class="card-body">
-                          <h5 class="card-title">Conocido youtuber desata polémica por NFTs</h5>
-                        </div>
-                        
-                        <img src="recursos/imagenes/Ejemplos/Noticias/noticia_3.jpg" class="d-block user-select-none" width="100%" height="200"/>
-                        <div class="card-body">
-                          <p class="card-text">El famoso youtuber conocido como Willyrex ínsita a sus seguidores a adentrarse en el mundo de la criptoeconomia</p>
-                        </div>
-                        <div class="card-body">
-                          <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                          2 days ago
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="NotiCard">
-                        <div class="card mb-3">
-                            <h3 class="card-header" style="background-color:red"> <img class="iconCard" src="recursos/imagenes/iconos/pizza-solid-24.png" /> </h3>
-                            <div class="card-body">
-                              <h5 class="card-title">Pizza con piña ¿Amigo o Enemigo?</h5>
-                            </div>
-                            
-                            <img src="recursos/imagenes/Ejemplos/Noticias/noticia_4.jpeg" class="d-block user-select-none" width="100%" height="200"/>
-                            <div class="card-body">
-                              <p class="card-text">Según un estudio reciente la pizza de piña podría contribuir a un correcto desarrollo neuronal, aunque también esconde un oscuro secreto</p>
-                            </div>
-                            <div class="card-body">
-                              <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                              2 days ago
-                            </div>
-                          </div>
-                        </div>
-
-
-
-
-                        <div class="NotiCard">
-                            <div class="card mb-3">
-                                <h3 class="card-header" style="background-color:gray"> <img class="iconCard" src="recursos/imagenes/iconos/money-withdraw-regular-24.png" /> </h3>
-                                <div class="card-body">
-                                  <h5 class="card-title">Mineros de criptomonedas descubren criptoduendes</h5>
-                                </div>
-                                
-                                <img src="recursos/imagenes/Ejemplos/Noticias/noticia_5.png" class="d-block user-select-none" width="100%" height="200"/>
-                                <div class="card-body">
-                                  <p class="card-text">Mineros de cripto monedas encuentran una extraña raza de duendes mineros mientras realizan profunda expedición en las ciber cuevas</p>
-                                </div>
-                                <div class="card-body">
-                                  <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-                                </div>
-                                <div class="card-footer text-muted">
-                                  2 days ago
-                                </div>
-                              </div>
-                            </div>
+        ?>
 
           
-
-
-          
-        </div>
+       
     </section>
 
     <section class="contenedor">

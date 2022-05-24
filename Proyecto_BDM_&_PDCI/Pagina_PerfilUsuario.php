@@ -83,7 +83,12 @@ $result = mysqli_query ($con, $query_mostrar);
                         <h3 id="FechaNacimientoPerfil"><?php  echo $_SESSION["fecha"];?></h3>                       
                         <a href="Pagina_ModificarPerfilUsuario.php">Modificar Perfil</a>
                         <a href="Pagina_ModificarFotoPerfil.php">Modificar Foto</a>
-                        <a href="Pagina_BajaUsuarioEditor.php"> Eliminar Usuario</a>                     
+
+                        <form action = "C_EliminarUsuario.php" action = POST id="form">
+                            
+                        <button type="submit"> Eliminar Usuario</button>   
+                        
+                    </form>
                         <br>                   
                     </div>                                        
         

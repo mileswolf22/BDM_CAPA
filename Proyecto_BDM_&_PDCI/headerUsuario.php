@@ -16,6 +16,9 @@ $result = mysqli_query ($con, $query_mostrar);
         $_SESSION['fecha']                              = $row[5];
 
     }
+
+
+    
 ?>
 
 <div class="loader"></div>

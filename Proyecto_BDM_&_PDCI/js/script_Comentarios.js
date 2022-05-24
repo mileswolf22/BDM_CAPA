@@ -12,7 +12,7 @@ function commentBox(){
 		var div_gruporespuestaUsuario=document.createElement('div');
 		div_gruporespuestaUsuario.setAttribute('class', 'grupoRespuesta usuario');
 
-		var div_gruporespuestaP=document.createElement('div');
+		var div_gruporespuestaP=document.createElement('div'); 
 		div_gruporespuestaP.setAttribute('class', 'grupoRespuesta p');
 
 		var div_grupoModificarRespuesta=document.createElement('div');

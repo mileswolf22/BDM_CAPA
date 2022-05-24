@@ -1,4 +1,18 @@
+<?php
+session_start();
 
+$mysqli = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli2 = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
+
+
+$rand = range(1, 10000);
+shuffle($rand);
+foreach ($rand as $val) {
+}
+
+
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -25,11 +39,24 @@
 <div class="form">
                 <h1>Modificar Sección</h1>
                 <br>
+                <h5>Nombre de la Seccion</h5>
                 <div class="grupo">
-                    <input type="text" name="" id="NombreSeccion" required><span class="barra"></span>
-                    <label class="datos-form" for="">Nombre de la Sección</label>
+                <select class="categorias-select" name="Etiqueta" id="menuEtiquetas"> 
+                        <option selected value = "0"> 
+                            ...
+                                    <?php
+                                    $query = $mysqli -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
+                                    
+                    </select>
                 </div>
                 <div class="grupo">
+                <br>
                     <h5>Color</h5>
                     <input type="color" name="Color" id="Color" value="#49408C" required>
                 </div>

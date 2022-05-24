@@ -1,4 +1,26 @@
+<?php
+$mysqli = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli2 = new mysqli('localhost', 'root', 'root', 'notidb');
+$mysqli3 = new mysqli('localhost', 'root', 'root', 'notidb');
 
+$_SESSION['Aut']   = ''; 
+$_SESSION['key']   = '';
+
+$con=mysqli_connect('localhost','root','root','notidb');
+
+$tempura = isset($_POST['num2']) ? $_POST['num2'] : '';
+$query_mostrar = "CALL MostrarModif('$tempura')";
+$result = mysqli_query ($con, $query_mostrar);
+    
+
+    while($row = mysqli_fetch_row($result))
+    {   
+        $_SESSION['Aut']                             = $row[0]; 
+        $_SESSION['key']                             = $row[1]; 
+    }
+
+
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -22,12 +44,14 @@
 <body class="bodyCrearNoticia">
 <div class="loader"></div>
 
-<form action="Pagina_ResultadoBuscar.html" method="GET" id="form">
+<form action="C_ModificarNoticia.php" method="POST" id="form">
 <div class="form">
                 <h1>Modificar Noticia</h1>
                 <br>
+                <input type="text" name="Autor" id="Autor" value =<?php echo $_SESSION['Aut']?>>
+                <input type="text" name="Key" id="Key" value =<?php echo $_SESSION['key']?>>
                 <div class="grupo">
-                    <input type="text" name="" id="Lugar" required><span class="barra"></span>
+                    <input type="text" name="Lugar" id="Lugar" required><span class="barra"></span>
                     <label class="datos-form" for="">Lugar Del Acontecimiento</label>
                 </div>
                 <div class="grupo">
@@ -35,20 +59,20 @@
                     <input type="datetime-local" name="FechaHora">
                 </div>
                 <div class="grupo">
-                    <input type="text" name="" id="Titulo" required><span class="barra"></span>
+                    <input type="text" name="Titulo" id="Titulo" required><span class="barra"></span>
                     <label class="datos-form" for="">Titulo</label>
                 </div>
                 <div class="grupo">
                     <h4>Descripción Breve</h4>
                     <br>
-                    <textarea class="detalle-textarea" name="texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
+                    <textarea class="detalle-textarea" name="descripcion" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
                 <div class="grupo">
                     <h4>Texto</h4>
                     <br>
                     <textarea class="detalle-textarea" name="texto" rows="4" cols="40" placeholder="Escriba algo"></textarea>
                 </div>
-                <div class="grupo">
+                <!--<div class="grupo">
                     <input type="file" id="imagenPrevisualizacion" accept="image/*" />
                     <label class="foto-form" for="imagenPrevisualizacion">Imagenes</label>  
                         <br>
@@ -116,9 +140,9 @@
 
                   </div>
                         
-                </div>
+                </div> -->
                 <div class="grupo">
-                    <input type="text" name="" id="Etiqueta" placeholder="Escribe tu etiqueta sin #">
+                    <input type="text" name="Etiqueta" id="Etiqueta" placeholder="Escribe tu etiqueta sin #">
                     <label class="datos-form" for="">Palabras Clave</label><span class="barra"></span>
                 </div>  
                 <div class="grupo">
@@ -126,25 +150,57 @@
                     <button type="button" onclick="EliminarEtiquetaBusquedaFuncion();" id="EliminarEtiqueta">Eliminar Etiqueta</button> 
                 </div>
                 <div class="grupo">
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                    <select class="categorias-select" name="Etiqueta" id="menuEtiquetas"> 
+                        <option selected value = "0"> 
+                            ...
+                                    <?php
+                                    $query = $mysqli3 -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
+                                    
+                    </select>
+                    <br><br>
+                </div> 
+                <br>
+                <div class="grupo">
+                
+                <h4>Sección Principal</h4>
+                    <select class="categorias-select" name="menuSeccion" id="menuSeccion"> 
+                        <option selected>...
+
+                        <?php
+                                    $query = $mysqli -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
                     </select>
                     <br><br>
                 </div> 
                 <div class="grupo">
-                <h4>Sección Principal</h4>
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
-                        <option selected>...</option>
+                    
+                <h4>Sección Secundaria</h4>
+                    <select class="categorias-select" name="menuSecundario" id="menuSecundario"> 
+                        <option selected>...
+
+                        <?php
+                                    $query = $mysqli2 -> query ("CALL Mostrar_Secciones()");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                        echo '<option value="'.$valores['key_seccion'].'">'.$valores['nombre_seccion'].'</option>';
+                                        }
+                                    ?>
+
+                        </option>
                     </select>
                     <br><br>
                 </div>
-                <div class="grupo">
-                <h4>Secciones Secundarias</h4>
-                    <select class="categorias-select" name="menuEtiquetas" id="menuEtiquetas"> 
-                        <option selected>...</option>
-                    </select>
-                    <br><br>
-                </div>
+                
 
                 <button type="submit" class="boton-preguntar">Enviar</button>
                

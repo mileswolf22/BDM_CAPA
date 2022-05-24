@@ -8,10 +8,11 @@ $password = "root";
 $dbname = "notidb";
 
 
-	$conn = new PDO(
-		"mysql:host=$server;dbname=$dbname","$username","$password");
-	
+	$conn = new PDO("mysql:host=$server;dbname=$dbname","$username","$password");
 	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+    $conn2 = new PDO("mysql:host=$server;dbname=$dbname","$username","$password");
+	$conn2->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 $temp = $_SESSION['TituloProvisionalR'];
 $query_mostrar = "CALL Mostrar_Noticia_Completa('$temp')";
@@ -172,19 +173,22 @@ $result = mysqli_query ($con, $query_mostrar);
                       <div class="carousel-inner">
                           <div class="carousel-item active">
                               <video class="videoPlayer" id="videoPlayer" height="340" controls >
-                                  <source src="./recursos/videos/Big_Enough.mp4" type="video/mp4">
+                              <?php
+                                    $contador2 = 0;
+                                    $temp2 = $_SESSION['numeroref'];
+                                    $stmt2 = $conn2->prepare("CALL Video_NotaCompleta('$temp2')");
+                                    $stmt2->execute();
+                                    $lista_imagenes = $stmt2->fetchAll(); 
+                                    foreach($lista_imagenes as $video) {
+                                        $contador2++;
+                                    ?>
+                                    <source src="./recursos/videos/<?=$video['video']?>" type="video/mp4">
+                                    <?php
+                                    }
+                                    ?>
                               </video>
                           </div>
-                          <div class="carousel-item">
-                              <video class="videoPlayer" height="340" controls>
-                                  <source src="./recursos/videos/Nyan_Cat.mp4" type="video/mp4">
-                              </video>
-                          </div>
-                          <div class="carousel-item"> 
-                              <video class="videoPlayer" height="340" controls>
-                                  <source src="./recursos/videos/Jinjo_Wii_BanjoKazooie.mp4" type="video/mp4">
-                              </video>
-                          </div>
+                          
                       </div>
                       <button class="carousel-control-prev" type="button" id="CarruselVideoPrev" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon"   onclick="PausaVideo();" aria-hidden="true"></span>
@@ -210,7 +214,10 @@ $result = mysqli_query ($con, $query_mostrar);
          
          case 'Reportero':
             ?>
-          <a href="Pagina_ModificarNoticia.php" class="buttonNoticiaEsh">Modificar Noticia</a> 
+         <form action="Pagina_ModificarNoticia.php" method="POST" id="form"> 
+            <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
+          <button  action = "Pagina_ModificarNoticia.php" method = "Post" class="buttonNoticiaEsh">Modificar Noticia</button> 
+          </form>
           <?php
            break;
            
