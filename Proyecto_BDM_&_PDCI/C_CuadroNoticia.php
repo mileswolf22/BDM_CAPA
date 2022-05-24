@@ -29,8 +29,7 @@ $_SESSION['tituloN'] = NULL;
             $dbname = "notidb";
         
         
-            $conn = new PDO(
-                "mysql:host=$server;dbname=$dbname","$username","$password");
+            $conn = new PDO("mysql:host=$server;dbname=$dbname","$username","$password");
             
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
@@ -44,11 +43,8 @@ $_SESSION['tituloN'] = NULL;
                     $_SESSION['seccionA']                            = $row[1]; 
                     $_SESSION['tituloA']                             = $row[2];
                     $_SESSION['descripcionA']                        = $row[3];
-                    
-                }
-
-            ?>
-            <head>
+                  ?>
+                  <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -63,7 +59,7 @@ $_SESSION['tituloN'] = NULL;
         <div class="card mb-3">
             <h3 class="card-header" id="cardCategoria" style="background-color:yellow"> <img class="iconCard" src="recursos/imagenes/iconos/movie-play-solid-24.png" /> </h3>
             <div class="card-body">
-              <h5 class="card-title"><?php echo$_SESSION['tituloA']?></h5>
+              <h5 class="card-title" name = "titulo" id = "titulo"><?php echo$_SESSION['tituloA']?></h5>
               <input type="hidden" name="num" id="num" value = <?php echo$_SESSION['numeroA']?>>
             </div>
             
@@ -85,13 +81,15 @@ $_SESSION['tituloN'] = NULL;
             </div>
             <div class="card-body">
            
-              <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
-
-              <?php
+            <form action = "Pagina_Noticia.php" method = "post">
+              <button href="Pagina_Noticia.php" class="card-link">VER MAS</button>
+               <?php
              
-                $_SESSION['TituloProvisionalA'] = $_SESSION['tituloA'];
+                $_POST['TituloProvisionalA'] = $_POST['tituloA'];
               
               ?>
+                  </form>
+             
 
             </div>
             <div class="card-footer text-muted">
@@ -99,6 +97,14 @@ $_SESSION['tituloN'] = NULL;
             </div>
           </div>
         </div>
+
+        <br><br>
+                  
+                  <?php
+                }
+
+            ?>
+            
 
         <?php
         }
@@ -380,10 +386,9 @@ $_SESSION['tituloN'] = NULL;
                     $_SESSION['seccionP']                            = $row[1]; 
                     $_SESSION['tituloP']                             = $row[2];
                     $_SESSION['descripcionP']                        = $row[3];
-                }
+                    ?>
 
-            ?>
-    <head>
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -421,7 +426,7 @@ $_SESSION['tituloN'] = NULL;
             </div>
             <div class="card-body">
           
-              <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>
+              <a href="Pagina_NoticiaP.php" class="card-link">VER MAS</a>
 
               <?php
              
@@ -435,10 +440,16 @@ $_SESSION['tituloN'] = NULL;
             </div>
           </div>
         </div>
-
+  <?php
+                }
+            ?>
+    
+          
         <?php 
         }
 
     }
+
+
   }
   ?>

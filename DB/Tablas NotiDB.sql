@@ -15,6 +15,7 @@ Anonimo bool DEFAULT 1,
 existe bool DEFAULT 0
 );
 
+
 CREATE TABLE Seccion(  /*Tabla para la creacion y almacen de las secciones*/
 key_seccion INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre_seccion varchar(30),
@@ -48,7 +49,7 @@ Pendiente BOOL DEFAULT 1,
 comentario_admin TINYTEXT
 );
 
-
+SELECT * FROM Comentario;
 CREATE TABLE Comentario(
 key_comentario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 cod_usuario INT,
@@ -61,6 +62,7 @@ Foto_com BLOB,
 Fecha_hora DATETIME,
 Texto_comentario TEXT
 );
+
 
 
 CREATE TABLE Imagen_noticia(
@@ -578,31 +580,30 @@ END $$
 
 DELIMITER $$
 CREATE PROCEDURE Agregar_Comentario(
-IN pNoticia_id INT,
+IN pNoticia_id VARCHAR(20),
 IN pUsuario varchar(50),
 IN pFoto BLOB,
 IN pTexto TEXT
 )
 BEGIN
-INSERT INTO Comentario(
+INSERT INTO comentario(
 noticia_id,
 Usuario_com,
 Foto_com,
-Fecha_hora,
 Texto_comentario
 )VALUES(
 pNoticia_id,
 pUsuario,
 pFoto,
-NOW(),
 pTexto
 );
+UPDATE comentario set Fecha_hora = NOW();
 END $$
+
 
 DELIMITER $$
 CREATE PROCEDURE Modificar_Comentario(
 IN pID INT,
-IN pNoticia INT,
 IN pUsuario varchar(50),
 IN pFoto BLOB,
 IN pFecha DATETIME,
@@ -612,7 +613,6 @@ BEGIN
 UPDATE Comentario
 SET
 
-noticia_id 			= pNoticia,
 Usuario_com    		= pUsuario,
 Foto_com			= pFoto, 
 Fecha_hora			= NOW(), 
@@ -622,12 +622,13 @@ WHERE key_comentario = pID;
 
 END $$
 
+
 DELIMITER $$
 CREATE PROCEDURE Eliminar_Comentario(
 IN pID INT
 )
 BEGIN
-DELETE FROM Comentario WHERE key_comemntario = pID;
+DELETE FROM Comentario WHERE key_comentario = pID;
 END $$
 
 DELIMITER $$
@@ -912,7 +913,6 @@ IN pSeccion VARCHAR(50)
 )
 BEGIN
 DELETE FROM Seccion WHERE key_seccion = pSeccion;
-DELETE FROM Noticia WHERE Seccion_principal = pSeccion;
 END $$
 
 DELIMITER $$
@@ -960,15 +960,101 @@ BEGIN
 SELECT Autor, key_noticia FROM Noticia WHERE numero_referencia = pNum;
 END $$
 
-
 DELIMITER $$
-CREATE PROCEDURE TraerPeliculas(
+CREATE PROCEDURE Modificar_Imagen_Noticia(
+IN pNumero VARCHAR(20),
+IN pImagen LONGBLOB,
+IN pDireccion TEXT,
+IN pContador INT
 )
 BEGIN
-SELECT * FROM Noticia WHERE Aprobada = 1;
+
+UPDATE Imagen_noticia SET
+
+imagen 				= pImagen,
+direccion_imagen 	= pDireccion,
+contador 			= pContador
+
+WHERE numero_referencia = pNumero;
+
 END $$
 
-CREATE TRIGGER Eliminar_Noticias BEFORE DELETE ON usuario 
-for each row
-DELETE 
+DELIMITER $$
+CREATE PROCEDURE Modificar_Video_Noticia(
+IN pNumero VARCHAR(20),
+IN pVideo TEXT,
+IN pDireccion TEXT
+)
+BEGIN
 
+UPDATE Video_noticia SET
+
+video 				= pVideo,
+direccion_video 	= pDireccion
+
+WHERE numero_referencia = pNumero;
+
+END $$
+
+/*//////////////////////////////////////////TRIGGERS/////////////////////////////////////////////////////*/
+
+use notidb;
+CREATE TRIGGER Eliminar_Noticias BEFORE DELETE ON usuario 
+FOR EACH ROW
+DELETE FROM Noticia WHERE noticia.Autor = usuario.usuario;
+
+
+CREATE TRIGGER Eliminar_Por_Seccion BEFORE DELETE ON seccion
+FOR EACH ROW
+DELETE FROM moticia WHERE moticia.Seccion_principal = seccion.nombre_seccion;
+
+/*//////////////////////////////////////////VIEWS/////////////////////////////////////////////////////*/
+/*Los views seran utilizados para la generacion del reporte*/
+
+CREATE VIEW datos_usuario_lector AS
+SELECT Nombre_usuario, Foto_perfil, Nombre_completo, correo, Numero_contacto, Fecha_nacimiento FROM usuario
+WHERE Comun = 1;
+
+drop view comentario_segun_noticia;
+CREATE VIEW comentario_segun_noticia AS
+SELECT key_comentario, noticia.key_noticia, noticia_id, Usuario_com, Foto_com, Fecha_hora, Texto_comentario
+FROM comentario INNER JOIN noticia ON noticia.key_noticia = comentario.noticia_id;
+
+CREATE VIEW datos_usuario_reportero AS
+SELECT Nombre_usuario, Foto_perfil, Nombre_completo, correo, Numero_contacto, Fecha_nacimiento FROM usuario
+WHERE Reportero = 1;
+
+CREATE VIEW datos_usuario_editor AS
+SELECT  Nombre_usuario, Foto_perfil, Nombre_completo, correo, Numero_contacto, Fecha_nacimiento FROM usuario
+WHERE Editor = 1;
+
+
+CREATE VIEW datos_noticia AS
+SELECT Titulo, Descripcion, Autor, Fecha_publicacion, Seccion_principal, Positivos FROM noticia WHERE aprobada = 1;
+
+CREATE VIEW datos_comentario AS
+SELECT key_comentario, noticia_id, Usuario_com, Foto_com, Fecha_hora, Texto_comentario
+FROM comentario;
+
+
+CREATE VIEW datos_seccion AS 
+SELECT nombre_seccion, color_seccion, noticia.Titulo FROM seccion
+INNER JOIN noticia ON seccion.nombre_seccion = noticia.Seccion_principal;
+
+CREATE VIEW noticias_mas_like AS
+SELECT * FROM noticia ORDER BY Positivos LIMIT 10;
+
+CREATE VIEW noticias_mas_vistas AS
+SELECT * FROM noticia ORDER BY contador_vistas LIMIT 10;
+
+CREATE VIEW noticias_aprobadas AS 
+SELECT Titulo, Descripcion, noticia.numero_referencia, imagen_noticia.imagen FROM noticia 
+INNER JOIN imagen_noticia ON imagen_noticia.numero_referencia = noticia.numero_referencia;
+
+/*//////////////////////////////////////////FUNCTION/////////////////////////////////////////////////////*/
+/*Los views seran utilizados para la generacion del reporte*/
+
+select * from datos_comentario;
+select * from comentario;
+
+select * from comentario_segun_noticia;

@@ -69,7 +69,11 @@ $result = mysqli_query ($con, $query_mostrar);
                     <p>¿De verdad quieres cerrar sesión? :c</p>
                 </div>
                 <div class="modal_botones">
-                    <a type = "submit" name = "btnAceptar" href="index.php" class="boton">ACEPTAR</a>
+                    <a type = "submit" name = "btnAceptar" id = "btnAceptar" href="index.php" class="boton">ACEPTAR</a>
+                    <?php
+                    
+
+                    ?>
                     <?php
                     /*
                         if (isset(_POST['btnAceptar'])) {

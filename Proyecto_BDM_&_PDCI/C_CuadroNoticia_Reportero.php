@@ -452,7 +452,7 @@ class cargaNotiReportero{
           <div class="noticiasCard">
           <div class="NotiCard">
       <div class="card mb-3">
-      <input type="hidden" name="seccion" id="seccion" value = <?php echo$_SESSION['seccionD']?>>
+      <input type="hidden" name="seccion" id="seccion" value = <?php echo$_SESSION['seccionP']?>>
       <?php
             $Aux_Seccion =  $_SESSION['seccionP']; 
 

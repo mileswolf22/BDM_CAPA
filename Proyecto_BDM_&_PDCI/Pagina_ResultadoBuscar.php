@@ -127,7 +127,7 @@ while($rowSql = $sql->fetch_assoc()){
             
             <img src="recursos/imagenes/diseño1.jpeg" class="d-block user-select-none" width="100%" height="200"/>
             <div class="card-body">
-              <p class="card-text">Es extraño pero por fin despues de tanto tiempo de espera ya sale Sherk 5. Esperenla pronto en cines.</p>
+              <p class="card-text"><?php echo $rowSql['Descripcion']; ?></p>
             </div>
             <div class="card-body">
               <a href="Pagina_Noticia.php" class="card-link">VER MAS</a>

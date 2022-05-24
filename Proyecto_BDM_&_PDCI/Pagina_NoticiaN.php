@@ -213,10 +213,20 @@ $result = mysqli_query ($con, $query_mostrar);
          
          case 'Reportero':
             ?>
-          form action="Pagina_ModificarNoticia.php" method="POST" id="form"> 
+          <form action="Pagina_ModificarNoticia.php" method="POST" id="form"> 
             <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
           <button  action = "Pagina_ModificarNoticia.php" method = "Post" class="buttonNoticiaEsh">Modificar Noticia</button> 
           </form> 
+
+          <form action = "Pagina_ModificarImagenNoticia.php" method = "Post" id="form">
+            <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
+          <button href="Pagina_ModificarImagenNoticia.php" class="buttonNoticiaEsh">Modificar Imagen Noticia</button>
+          </form>
+
+          <form action = "Pagina_ModificarVideoNoticia.php" method = "Post" id="form">
+            <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
+          <button href="Pagina_ModificarVideoNoticia.php" class="buttonNoticiaEsh">Modificar Videos Noticia</button>
+          </form>
           <?php
            break;
            

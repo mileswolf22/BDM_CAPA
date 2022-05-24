@@ -57,7 +57,7 @@ $result = mysqli_query ($con, $query_mostrar);
         <script src="js/script_LikeDislike.js"></script>
         <script src="js/script_ComentariosYaPuestos.js"></script>
         <script src="js/script_Comentarios.js"></script>
-        <script src="js/script_FechaHora.js"></script>
+        <script src="js/script_FechaHora.js"></script> 
         
 
         <?php  include ('./headUsuario.php')?>
@@ -65,7 +65,7 @@ $result = mysqli_query ($con, $query_mostrar);
     </head>
 
 
-    <body onload="ComentariosYaPuestos();PonerCategorias();">
+    <body onload="PonerCategorias();">
 
 
     <?php  include ('./headerUsuario.php')?>
@@ -101,6 +101,9 @@ $result = mysqli_query ($con, $query_mostrar);
                 <h5><?php echo$_SESSION['descripcion']?></h5>
 
                 <input type="hidden" name="num" id="num" value = <?php echo$_SESSION['numeroref']?>>
+                <input type="hidden" name="idN" id="idN" value = <?php echo$_SESSION['id']?>>
+                <input type="hidden" name="UserS" id="UserS" value = <?php echo$_SESSION['US']?>>
+                <input type="hidden" name="foto" id="foto" value = "data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>">
                 
                 <div class="LugarFechaNoticia">
                     <h3 class="LugarFechaNoticia-Datos"><?php echo$_SESSION['lugarsuceso']?></h3>
@@ -223,6 +226,18 @@ $result = mysqli_query ($con, $query_mostrar);
             <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
           <button  action = "Pagina_ModificarNoticia.php" method = "Post" class="buttonNoticiaEsh">Modificar Noticia</button> 
           </form>
+          
+          <form action = "Pagina_ModificarImagenNoticia.php" method = "Post" id="form">
+            <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
+          <button href="Pagina_ModificarImagenNoticia.php" class="buttonNoticiaEsh">Modificar Imagen Noticia</button>
+          </form>
+
+          <form action = "Pagina_ModificarVideoNoticia.php" method = "Post" id="form">
+            <input type="hidden" name="num2" id="num2" value = <?php echo$_SESSION['numeroref']?>>
+          <button href="Pagina_ModificarVideoNoticia.php" class="buttonNoticiaEsh">Modificar Videos Noticia</button>
+          </form>
+
+
           <?php
            break;
            
@@ -240,7 +255,7 @@ $result = mysqli_query ($con, $query_mostrar);
                 <div class="imagenLike"> 
                                 
                  <img id="LikeP_1" class="imagen-iconoLike offoff"onclick="funcioniconLike(this)" src="recursos/imagenes/iconos/star-regular-48.png">
-                  <h3> 0 </h3>
+                  <h3> <?php echo$_SESSION['positivos']?> </h3>
                   <h3> ★</h3>
                   <br><br><br>
                 </div> 
@@ -261,16 +276,38 @@ $result = mysqli_query ($con, $query_mostrar);
 
     <section class="contenedor">
 
-    <?php
-
-    include ('./CuadroComentarios.php');
-
-    ?>
-
-    
-
-    <div class="comentariosRespuestas">
-                      <form class="comentariosRespuestasform">
+    <div class="contenedor-comentariosRespuesta">
+                <div class="respuestas-resultado">
+                          </div>
+                          <div id="result">
+<!-------------------------------------------------------------------------------><!-------------------------------------------------------------------------------><!------------------------------------------------------------------------------->
+                        
+<div class="respuesta Contenedor_0">
+                              <div class="grupoRespuesta usuario">
+                              <input type="hidden" name="num" id="num" >
+                                  <h4 class="Editado-Respuesta">No Editado</h4>
+                                  <h4 class="FechaHora-Respuesta"></h4>
+                                  <br>
+                                  <h4 class="FechaHora-Respuesta"> <?php echo $_SESSION['US']?> </h4>
+                            
+                                  <a class="aimagen-usuario" href="Pagina_Perfil.html">
+                                      <img class="imagen-usuario" src="data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>"></a>
+                                      <a class="titulo-usuarioRespuesta" href="Pagina_Perfil.html">0</a>
+                                      <hr class="hr-usuarioRespuesta" style="border: 1px solid rgb(73, 64, 140);">
+                                    </div>
+                                    <div class="grupoRespuesta p">
+                                       
+                                    </div>
+                                    <div class="grupoRespuesta modificarRespuesta">
+                                  
+                                        <form action="C_EliminarComentario.php" method="POST" id="form"> 
+                                        <button class="Modificar-usuarioRespuesta" name = "bntElim" id = "btnElim" href="#">Eliminar Comentario</button>
+                                        </form>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                          
                           <div class="grupo">
                           <input class="usuario" type="text" name="" id="usuario" title="panoso">
                           <input class="IdEscondido" type="text" name="" id="IdEscondido">
@@ -278,20 +315,105 @@ $result = mysqli_query ($con, $query_mostrar);
 
                          
                           <label class="datos-form">Comentario</label>
-                          <textarea id="comment" class="form-control" required ></textarea></label>
+                         
                           </div>
 
                           <br><br>
-                        <button type="button" class="buttonComentario" onclick="commentBox();">Enviar</button>
+                        <form action="C_CrearComentario.php" method="POST" id="form"> 
+                            <input class="respuesta-usuarioRespuesta" name = "texto" id = "texto">
+                        <button type="submit" class="buttonComentario" onclick="commentBox();">Enviar</button>
+                        <input type="hidden" name="UserS" id="UserS" value = <?php echo$_SESSION['US']?>>
+                        <input type="hidden" name="foto" id="foto" value = "data:image/jpg;base64, <?php echo "".base64_encode($_SESSION['foto']); ?>">
+                        <input type="hidden" name="idN" id="idN" value = <?php echo$_SESSION['id']?>>
+                        </form>
                         <br>
-                      </form>
+                      
                   </div>
 
                   <script src="js/script_Comentarios.js"></script>
-            </div>
+            
+                            <br><br>
+<!-------------------------------------------------------------------------------><!-------------------------------------------------------------------------------><!------------------------------------------------------------------------------->
+
+                      </div>
+    
+
+<!-------------------------------------------------------------------------------><!-------------------------------------------------------------------------------><!------------------------------------------------------------------------------->
+                        
+    <?php
+    $_POST['id'] = '';
+    $_POST['key'] = '';
+    $_POST['user'] = '';
+    $_POST['foto'] = '';
+    $_POST['fecha'] = '';
+    $_POST['texto'] = '';
+    $con=mysqli_connect('localhost','root','root','notidb');
+$query_mostrar = "SELECT * FROM datos_comentario";
+$result = mysqli_query ($con, $query_mostrar);
+    
+    while($row = mysqli_fetch_row($result))
+    {   
+        $_POST['id']                            = $row[0]; 
+        $_POST['idN']                           = $row[1];
+        $_POST['user']                          = $row[2]; 
+        base64_encode($_POST['foto']            = $row[3]); 
+        $_POST['fecha']                         = $row[4]; 
+        $_POST['texto']                         = $row[5]; 
+        
+$usuario_auxiliar = $_POST['user'];
+$usuario_logeado = $_SESSION['US'];
+
+$con=mysqli_connect('localhost','root','root','notidb');
+$query_mostrar = "SELECT * FROM comentario_segun_noticia";
+$resultado = mysqli_query ($con, $query_mostrar);
+
+
+?>
+<div class="respuesta Contenedor_0">
+                              <div class="grupoRespuesta usuario">
+                              <input type="hidden" name="num" id="num" value = <?php echo $_POST['id']?>>
+                                  <h4 class="Editado-Respuesta">No Editado</h4>
+                                  <h4 class="FechaHora-Respuesta"> <?php echo $_POST['fecha']?> </h4>
+                                  <br>
+                                  <h4 class="FechaHora-Respuesta"> <?php echo $_POST['user']?> </h4>
+                            
+                                  <a class="aimagen-usuario" href="Pagina_Perfil.html">
+                                      <img class="imagen-usuario" src="data:image/jpg;base64, <?php echo "".base64_encode($_POST['foto']); ?>"></a>
+                                      <a class="titulo-usuarioRespuesta" href="Pagina_Perfil.html">0</a>
+                                      <hr class="hr-usuarioRespuesta" style="border: 1px solid rgb(73, 64, 140);">
+                                    </div>
+                                    <div class="grupoRespuesta p">
+                                        <p class="respuesta-usuarioRespuesta"> <?php echo $_POST['texto']?> </p>
+                                    </div>
+                                  <?php
+                                if($usuario_auxiliar == $usuario_logeado){
+                                  ?>
+                             
+                                    <form action="C_EliminarComentario.php" method="POST" id="form"> 
+                                        <button class="Modificar-usuarioRespuesta" name = "bntElim" id = "btnElim" href="#">Eliminar Comentario</button>
+                                        <input type="hidden" name="id" id="id" value = <?php echo $_POST['id']?>>
+                                        </form>  
+
+                                <?php
+                                }
+                                ?>
+                                    <div class="grupoRespuesta modificarRespuesta">
+                           
+                                    </div>
+                                </div>
+
+                            </div>
+                           <br><br>
+
+<?php    };
+     
+     ?>
+<!-------------------------------------------------------------------------------><!-------------------------------------------------------------------------------><!------------------------------------------------------------------------------->
           
 
     </section>
+
+
     
     
 </main>
